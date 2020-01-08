@@ -3,6 +3,8 @@ import requests
 import json
 import time
 import sys
+import getpass
+import datetime
 
 def main():
     print('1) YouTube')
@@ -48,13 +50,22 @@ def choice(cw):
     else:
         sys.exit("Error #1. Please report your error to https://github.com/Gumbraise/HXYA/issues with a screenshot of the console")
 def instagram():
-    print('>>>In building ;)')
-    main()
+    try:
+        import InstagramAPI
+    except (ModuleNotFoundError):
+        try:
+            import subprocess
+            subprocess.call([r'C:\Users\kelli\Desktop\YOUTUBE_py\path\instagram\instagramapi.bat'])
+        except (FileNotFoundError):
+            sys.exit('instagramapi.bat is missing. Reinstall HXYA here : https://github.com/gumbraise/HXYA')
 def youtubemenu():
-    js = "path/youtube/keys.json"
-    jsonFile = open(js)
-    keys = json.load(jsonFile)
-    jsonFile.close()
+    try:
+        js = "path/youtube/keys.json"
+        jsonFile = open(js)
+        keys = json.load(jsonFile)
+        jsonFile.close()
+    except (FileNotFoundError):
+        sys.exit('keys.json is missing. Reinstall HXYA here : https://github.com/gumbraise/HXYA')
     if (keys['perso'] == "none"):
         print("Paste your new YouTube API V3 Key here: ")
         API_KEY = input("HXYA>YouTube>Change keys>API Key>")
@@ -96,15 +107,10 @@ print('| |   | || /   \ |   | |   | |   | |')
 print('|/     \||/     \|   \_/   |/     \|')
 print('Gumbraise©2020  GitHub.com/gumbraise')
 print('')
-print('Welcome to HXYA')
+print('Welcome to HXYA ' + getpass.getuser())
+print('It is ' + str(datetime.datetime.now()))
 print('If you find a bug, please report it to https://github.com/Gumbraise/HXYA/issues')
 print('Please review the README at https://github.com/Gumbraise/HXYA/README.md before proceeding')
 print('')
 
 main()
-
-"""
-jsonFile = open('path/youtube/donttouch.json')
-keys = json.load(jsonFile)
-jsonFile.close()
-"""

@@ -1,0 +1,3 @@
+echo Don't move, we install the plugin InstagramAPI for you...
+pip install InstagramAPI
+python .\hxya.py

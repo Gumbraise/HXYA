@@ -3,11 +3,15 @@ import requests
 import json
 import time
 import sys
+import datetime
 
-js = "path/youtube/keys.json"
-jsonFile = open(js)
-keys = json.load(jsonFile)
-jsonFile.close()
+try:
+    js = "path/youtube/keys.json"
+    jsonFile = open(js)
+    keys = json.load(jsonFile)
+    jsonFile.close()
+except (FileNotFoundError):
+    sys.exit('keys.json is missing. Reinstall HXYA here : https://github.com/gumbraise/HXYA')
 
 API_KEY = keys["API_KEY"]
 ChannelId = keys["ChannelId"]
@@ -49,11 +53,12 @@ def like():
         try:
             response = requests.get(url)
             respJSON = response.json()
-            numberOfLikes = int( respJSON['items'][0].get("statistics").get("likeCount") )
+            number = int( respJSON['items'][0].get("statistics").get("likeCount") )
+            print(datetime.datetime.now()+" >>> "+number)
         except:
             print("Ohoh...")
 
-        if (numberOfLikes >= like_number_limit):
+        if (number >= like_number_limit):
             os.system("taskkill /im obs64.exe")
             print(">>>OBS is taskkilled")
             sys.path.append("../../")
@@ -100,11 +105,12 @@ def dislike():
         try:
             response = requests.get(url)
             respJSON = response.json()
-            numberOfdislike = int( respJSON['items'][0].get("statistics").get("dislikeCount") )
+            number = int( respJSON['items'][0].get("statistics").get("dislikeCount") )
+            print(datetime.datetime.now()+" >>> "+number)
         except:
             print("Ohoh...")
 
-        if (numberOfdislike >= dislike_number_limit):
+        if (number >= dislike_number_limit):
             os.system("taskkill /im obs64.exe")
             print(">>>OBS is taskkilled")
             sys.path.append("../../")
@@ -125,11 +131,11 @@ def sub():
         try:
             response = requests.get(url)
             respJSON = response.json()
-            numberOfSubs = int( respJSON['items'][0].get("statistics").get("subscriberCount") )
+            number = int( respJSON['items'][0].get("statistics").get("subscriberCount") )
         except:
             print("Ohoh...")
 
-        if (numberOfSubs >= sub_number_limit):
+        if (number >= sub_number_limit):
             os.system("taskkill /im obs64.exe")
             print(">>>OBS is taskkilled")
             sys.path.append("../../")
@@ -176,11 +182,12 @@ def comment():
         try:
             response = requests.get(url)
             respJSON = response.json()
-            numberOfComments = int( respJSON['items'][0].get("statistics").get("commentCount") )
+            number = int( respJSON['items'][0].get("statistics").get("commentCount") )
+            print(datetime.datetime.now()+" >>> "+number)
         except:
             print("Ohoh...")
 
-        if (numberOfComments >= comment_number_limit):
+        if (number >= comment_number_limit):
             os.system("taskkill /im obs64.exe")
             print(">>>OBS is taskkilled")
             sys.path.append("../../")
@@ -227,11 +234,12 @@ def view():
         try:
             response = requests.get(url)
             respJSON = response.json()
-            numberOfviews = int( respJSON['items'][0].get("statistics").get("viewCount") )
+            number = int( respJSON['items'][0].get("statistics").get("viewCount") )
+            print(datetime.datetime.now()+" >>> "+number)
         except:
             print("Ohoh...")
 
-        if (numberOfviews >= view_number_limit):
+        if (number >= view_number_limit):
             os.system("taskkill /im obs64.exe")
             print(">>>OBS is taskkilled")
             sys.path.append("../../")
