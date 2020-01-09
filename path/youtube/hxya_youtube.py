@@ -54,7 +54,7 @@ def like():
             response = requests.get(url)
             respJSON = response.json()
             number = int( respJSON['items'][0].get("statistics").get("likeCount") )
-            print(datetime.datetime.now()+" >>> "+number)
+            print(str(datetime.datetime.now()) + " >>> " + str(number))
         except:
             print("Ohoh...")
 
@@ -106,7 +106,7 @@ def dislike():
             response = requests.get(url)
             respJSON = response.json()
             number = int( respJSON['items'][0].get("statistics").get("dislikeCount") )
-            print(datetime.datetime.now()+" >>> "+number)
+            print(str(datetime.datetime.now()) + " >>> " + str(number))
         except:
             print("Ohoh...")
 
@@ -132,6 +132,7 @@ def sub():
             response = requests.get(url)
             respJSON = response.json()
             number = int( respJSON['items'][0].get("statistics").get("subscriberCount") )
+            print(str(datetime.datetime.now()) + " >>> " + str(number))
         except:
             print("Ohoh...")
 
@@ -183,7 +184,7 @@ def comment():
             response = requests.get(url)
             respJSON = response.json()
             number = int( respJSON['items'][0].get("statistics").get("commentCount") )
-            print(datetime.datetime.now()+" >>> "+number)
+            print(str(datetime.datetime.now()) + " >>> " + str(number))
         except:
             print("Ohoh...")
 
@@ -235,7 +236,7 @@ def view():
             response = requests.get(url)
             respJSON = response.json()
             number = int( respJSON['items'][0].get("statistics").get("viewCount") )
-            print(datetime.datetime.now()+" >>> "+number)
+            print(str(datetime.datetime.now()) + " >>> " + str(number))
         except:
             print("Ohoh...")
 
