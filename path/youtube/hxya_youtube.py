@@ -4,6 +4,7 @@ import json
 import time
 import sys
 import datetime
+import getpass
 
 try:
     js = "path/youtube/keys.json"
@@ -13,242 +14,126 @@ try:
 except (FileNotFoundError):
     sys.exit('keys.json is missing. Reinstall HXYA here : https://github.com/gumbraise/HXYA')
 
+s = str(datetime.datetime.now())
+snew = s.replace(" ", "")
+stwo = s.replace(":", "-")
+
+logsfile = open("logs/"+stwo+".log","w+")
+logsfile.write("STARTED YOUTUBE PROGRAM AT " + str(datetime.datetime.now()) + ", " + getpass.getuser() + "\n")
+
 API_KEY = keys["API_KEY"]
 ChannelId = keys["ChannelId"]
 
-def like():
+def video(one):
+    logs("client", "info", "Choose Youtube "+str(one)+"\n")
     if(keys['VideoId'] == "0"):
         VideoId = str(input("Paste the VideoId here: "))
+        logs("hxya", "info", "Paste the VideoId here: \n")
+        logs("client", "info", "Used: " + str(VideoId)+"\n")
         if not VideoId:
-            like()
+            video(one)
         else:
-            tmp_videoid = keys["VideoId"]
             keys["VideoId"] = VideoId
             jsonFile = open(js, "w")
             jsonFile.write(json.dumps(keys))
             jsonFile.close()
+            logs("hxya", "info", "Changed videoId to: " + str(VideoId) + "\n")
+
     else:
         video_ask = str(input("Do you want change the VideoId => "+keys["VideoId"]+" ? (y/n) "))
+        logs("hxya", "info", "Do you want change the VideoId => "+keys["VideoId"]+" ? (y/n)\n")
+        logs("client", "info", "Used: " + str(video_ask) + "\n")
         if (video_ask == 'y'):
             VideoId = input("Paste the VideoId here: ")
+            logs("hxya", "info", "Paste the VideoId here:\n")
+            logs("client", "info", "Used: " + str(VideoId)+"\n")
             if not VideoId:
-                like()
+                video(one)
             else:
-                tmp_videoid = keys["VideoId"]
                 keys["VideoId"] = VideoId
                 jsonFile = open(js, "w")
                 jsonFile.write(json.dumps(keys))
                 jsonFile.close()
+                logs("hxya", "warn", "keys.json successful opened\n")
+                logs("hxya", "info", "Changed videoId to: " + str(VideoId) + "\n")
+
         elif (video_ask == 'n'):
             VideoId = keys['VideoId']
+            logs("client", "info", "Used videoId: " + str(VideoId) + "\n")
         else:
-            like()
+            video(one)
 
     #Do not change:
     url = 'https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id='+VideoId+'&key='+API_KEY
     #-------------
-    like_number_limit = int(input('How many likes do you want to close OBS ?: '))
+    number_limit = int(input('How many '+one+' do you want to close OBS ?: '))
+    logs("hxya", "info", "How many "+one+" do you want to close OBS ?:\n")
+    logs("client", "info", "Used: " + str(number_limit)+"\n")
     print ('If the software doesn\'t lauch after 15 seconds restart the software and modify your YouTube API V3 Key')
+    logs("hxya", "info", 'If the software doesn\'t lauch after 15 seconds restart the software and modify your YouTube API V3 Key\n')
     while True:
+        response = requests.get(url)
+        respJSON = response.json()
         try:
-            response = requests.get(url)
-            respJSON = response.json()
-            number = int( respJSON['items'][0].get("statistics").get("likeCount") )
-            print(str(datetime.datetime.now()) + " >>> " + str(number))
-        except:
-            print("Ohoh...")
+            number = int( respJSON['items'][0].get("statistics").get(one.lower()+"Count") )
+            print(str(datetime.datetime.now()) + " >>> " + str(number) + one.lower())
+            logs("hxya", "info", str(datetime.datetime.now()) + " >>> " + str(number) + one.lower() + "\n")
 
-        if (number >= like_number_limit):
-            os.system("taskkill /im obs64.exe")
-            print(">>>OBS is taskkilled")
-            sys.path.append("../../")
-            import hxya
-            hxya.youtubemenu()
-            break
-            
-        time.sleep(15)
+            if (number >= number_limit):
+                os.system("taskkill /im obs64.exe")
+                logs("hxya", "warn", "Taskkilled OBS\n")
+                print(">>>OBS is taskkilled")
+                logs("hxya", "info", ">>>OBS is taskkilled\n")
+                sys.path.append("../../")
+                logs("hxya", "warn", "System path updated to *root*\n")
+                import hxya
+                logs("hxya", "warn", "Imported hxya\n")
+                hxya.youtubemenu()
+                logs("hxya", "warn", "ENDED BY BREAK\n")
+                break
+        except (KeyError):
+            keyerror = str( respJSON['error'].get("message") )
+            logs("hxya", "error", "Fatal error JSON\n")
 
-def dislike():
-    if(keys['VideoId'] == "0"):
-        VideoId = str(input("Paste the VideoId here: "))
-        if not VideoId:
-            dislike()
-        else:
-            tmp_videoid = keys["VideoId"]
-            keys["VideoId"] = VideoId
-            jsonFile = open(js, "w")
-            jsonFile.write(json.dumps(keys))
-            jsonFile.close()
-    else:
-        video_ask = str(input("Do you want change the VideoId => "+keys["VideoId"]+" ? (y/n) "))
-        if (video_ask == 'y'):
-            VideoId = input("Paste the VideoId here: ")
-            if not VideoId:
-                dislike()
-            else:
-                tmp_videoid = keys["VideoId"]
-                keys["VideoId"] = VideoId
-                jsonFile = open(js, "w")
-                jsonFile.write(json.dumps(keys))
-                jsonFile.close()
-        elif (video_ask == 'n'):
-            VideoId = keys['VideoId']
-        else:
-            sys.exit('Error')
+            crash("fatal", stwo, str(datetime.datetime.now()), keyerror)
 
-    #Do not change:
-    url = 'https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id='+VideoId+'&key='+API_KEY
-    #-------------
-    dislike_number_limit = int(input('How many dislikes do you want to close OBS ?: '))
-    print ('If the software doesn\'t lauch after 15 seconds restart the software and modify your YouTube API V3 Key')
-    while True:
-        try:
-            response = requests.get(url)
-            respJSON = response.json()
-            number = int( respJSON['items'][0].get("statistics").get("dislikeCount") )
-            print(str(datetime.datetime.now()) + " >>> " + str(number))
-        except:
-            print("Ohoh...")
+            print("An error as occured. A crash report has been created in the crash-reports folder. A copy of the file is sending to our team.")
+            logs("hxya", "info", "An error as occured. A crash report has been created in the /crash-reports folder. A copy of the file is sending to our team.\n")
 
-        if (number >= dislike_number_limit):
-            os.system("taskkill /im obs64.exe")
-            print(">>>OBS is taskkilled")
-            sys.path.append("../../")
-            import hxya
-            hxya.youtubemenu()
             break
 
-        time.sleep(15)
+        time.sleep(60)
 
-def sub():
+def channel(one):
     #Do not change:
     url = 'https://www.googleapis.com/youtube/v3/channels?part=statistics&id='+ChannelId+'&key='+API_KEY
 
     #-------------
-    sub_number_limit = int(input('How many subs do you want to close OBS ?: '))
+    number_limit = int(input('How many subs do you want to close OBS ?: '))
     print ('If the software doesn\'t lauch after 15 seconds restart the software and modify your YouTube API V3 Key')
     while True:
+        response = requests.get(url)
+        respJSON = response.json()
         try:
-            response = requests.get(url)
-            respJSON = response.json()
-            number = int( respJSON['items'][0].get("statistics").get("subscriberCount") )
+            number = int( respJSON['items'][0].get("statistics").get(one.lower()+"Count") )
             print(str(datetime.datetime.now()) + " >>> " + str(number))
-        except:
-            print("Ohoh...")
 
-        if (number >= sub_number_limit):
-            os.system("taskkill /im obs64.exe")
-            print(">>>OBS is taskkilled")
-            sys.path.append("../../")
-            import hxya
-            hxya.youtubemenu()
-            break
-        
-        time.sleep(15)
-
-def comment():
-    if(keys['VideoId'] == "0"):
-        VideoId = str(input("Paste the VideoId here: "))
-        if not VideoId:
-            comment()
-        else:
-            tmp_videoid = keys["VideoId"]
-            keys["VideoId"] = VideoId
-            jsonFile = open(js, "w")
-            jsonFile.write(json.dumps(keys))
-            jsonFile.close()
-    else:
-        video_ask = str(input("Do you want change the VideoId => "+keys["VideoId"]+" ? (y/n) "))
-        if (video_ask == 'y'):
-            VideoId = input("Paste the VideoId here: ")
-            if not VideoId:
-                comment()
-            else:
-                tmp_videoid = keys["VideoId"]
-                keys["VideoId"] = VideoId
-                jsonFile = open(js, "w")
-                jsonFile.write(json.dumps(keys))
-                jsonFile.close()
-        elif (video_ask == 'n'):
-            VideoId = keys['VideoId']
-        else:
-            sys.exit('Error')
-
-    #Do not change:
-    url = 'https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id='+VideoId+'&key='+API_KEY
-    #-------------
-    comment_number_limit = int(input('How many comments do you want to close OBS ?: '))
-    print ('If the software doesn\'t lauch after 15 seconds restart the software and modify your YouTube API V3 Key')
-    while True:
-        try:
-            response = requests.get(url)
-            respJSON = response.json()
-            number = int( respJSON['items'][0].get("statistics").get("commentCount") )
-            print(str(datetime.datetime.now()) + " >>> " + str(number))
-        except:
-            print("Ohoh...")
-
-        if (number >= comment_number_limit):
-            os.system("taskkill /im obs64.exe")
-            print(">>>OBS is taskkilled")
-            sys.path.append("../../")
-            import hxya
-            hxya.youtubemenu()
+            if (number >= number_limit):
+                os.system("taskkill /im obs64.exe")
+                print(">>>OBS is taskkilled")
+                sys.path.append("../../")
+                import hxya
+                hxya.youtubemenu()
+                break
+        except (KeyError):
+            keyerror = str( respJSON['error'].get("message") )
+            print("##FATAL ERROR##")
+            print(str(datetime.datetime.now()) + " >>> Message:")
+            print(str(keyerror))
+            print("###############")
             break
 
-        time.sleep(15)
-
-def view():
-    if(keys['VideoId'] == "0"):
-        VideoId = str(input("Paste the VideoId here: "))
-        if not VideoId:
-            view()
-        else:
-            tmp_videoid = keys["VideoId"]
-            keys["VideoId"] = VideoId
-            jsonFile = open(js, "w")
-            jsonFile.write(json.dumps(keys))
-            jsonFile.close()
-    else:
-        video_ask = str(input("Do you want change the VideoId => "+keys["VideoId"]+" ? (y/n) "))
-        if (video_ask == 'y'):
-            VideoId = input("Paste the VideoId here: ")
-            if not VideoId:
-                view()
-            else:
-                tmp_videoid = keys["VideoId"]
-                keys["VideoId"] = VideoId
-                jsonFile = open(js, "w")
-                jsonFile.write(json.dumps(keys))
-                jsonFile.close()
-        elif (video_ask == 'n'):
-            VideoId = keys['VideoId']
-        else:
-            sys.exit('Error')
-
-    #Do not change:
-    url = 'https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id='+VideoId+'&key='+API_KEY
-    #-------------
-    view_number_limit = int(input('How many views do you want to close OBS ?: '))
-    print ('If the software doesn\'t lauch after 15 seconds restart the software and modify your YouTube API V3 Key')
-    while True:
-        try:
-            response = requests.get(url)
-            respJSON = response.json()
-            number = int( respJSON['items'][0].get("statistics").get("viewCount") )
-            print(str(datetime.datetime.now()) + " >>> " + str(number))
-        except:
-            print("Ohoh...")
-
-        if (number >= view_number_limit):
-            os.system("taskkill /im obs64.exe")
-            print(">>>OBS is taskkilled")
-            sys.path.append("../../")
-            import hxya
-            hxya.youtubemenu()
-            break
-
-        time.sleep(15)
+        time.sleep(60)
 
 def change():
     print('1) API Key')
@@ -285,3 +170,25 @@ def change():
         sys.path.append("../../")
         import hxya
         hxya.youtubemenu()
+
+
+def crash(type, date, time, reason):
+    try:
+        jsonFile = open("package.json")
+        package = json.load(jsonFile)
+        jsonFile.close()
+    except (FileNotFoundError):
+        sys.exit('package.json is missing. Reinstall HXYA here : https://github.com/gumbraise/HXYA')
+
+
+    crash = open("crash-reports/"+ type +"crash-"+date+"-client.yml","w+")
+    crash.write("error: "+type+"\n")
+    crash.write("items:\n")
+    crash.write("   package: youtube\n")
+    crash.write("   version: "+package['version']+"\n")
+    crash.write("   time: "+time+"\n")
+    crash.write("   reason: "+reason+"\n")
+
+def logs(who, what, text):
+    date = str(datetime.datetime.now().hour)+":"+str(datetime.datetime.now().minute)+":"+str(datetime.datetime.now().second)
+    logsfile.write("["+date+"] ["+who.upper()+"/"+what.upper()+"]: "+text)

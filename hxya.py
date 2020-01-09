@@ -29,15 +29,15 @@ def choice(cw):
         sys.path.append("path/youtube/")
         import hxya_youtube
         if (c2 == 1):
-            hxya_youtube.like()
+            hxya_youtube.video("like")
         elif (c2 == 2):
-            hxya_youtube.dislike()
+            hxya_youtube.video("dislike")
         elif (c2 == 3):
-            hxya_youtube.sub()
+            hxya_youtube.channel("sub")
         elif (c2 == 4):
-            hxya_youtube.comment()
+            hxya_youtube.video("comment")
         elif (c2 == 5):
-            hxya_youtube.view()
+            hxya_youtube.video("view")
         elif (c2 == 6):
             hxya_youtube.change()
         elif (c2 == 7):
