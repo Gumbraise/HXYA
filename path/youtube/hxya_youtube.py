@@ -76,8 +76,8 @@ def video(one):
         respJSON = response.json()
         try:
             number = int( respJSON['items'][0].get("statistics").get(one.lower()+"Count") )
-            print(str(datetime.datetime.now()) + " >>> " + str(number) + one.lower())
-            logs("hxya", "info", str(datetime.datetime.now()) + " >>> " + str(number) + one.lower() + "\n")
+            print(str(datetime.datetime.now()) + " >>> " + str(number) + " " + one.lower())
+            logs("hxya", "info", str(datetime.datetime.now()) + " >>> " + str(number) + " " + one.lower() + "\n")
 
             if (number >= number_limit):
                 os.system("taskkill /im obs64.exe")
@@ -89,7 +89,7 @@ def video(one):
                 import hxya
                 logs("hxya", "warn", "Imported hxya\n")
                 hxya.youtubemenu()
-                logs("hxya", "warn", "ENDED BY BREAK\n")
+                logs("hxya", "warn", "FINISHED BY BREAK\n")
                 break
         except (KeyError):
             keyerror = str( respJSON['error'].get("message") )
@@ -105,33 +105,48 @@ def video(one):
         time.sleep(60)
 
 def channel(one):
+    logs("client", "info", "Choose Youtube " + str(one) + "\n")
     #Do not change:
     url = 'https://www.googleapis.com/youtube/v3/channels?part=statistics&id='+ChannelId+'&key='+API_KEY
-
     #-------------
     number_limit = int(input('How many subs do you want to close OBS ?: '))
+    logs("hxya", "info", "How many subs do you want to close OBS ?: \n")
+    logs("client", "info", "Used: " + str(number_limit) + "\n")
+
     print ('If the software doesn\'t lauch after 15 seconds restart the software and modify your YouTube API V3 Key')
+    logs("hxya", "info", "If the software doesn\'t lauch after 15 seconds restart the software and modify your YouTube API V3 Key\n")
     while True:
         response = requests.get(url)
         respJSON = response.json()
         try:
             number = int( respJSON['items'][0].get("statistics").get(one.lower()+"Count") )
-            print(str(datetime.datetime.now()) + " >>> " + str(number))
+            print(str(datetime.datetime.now()) + " >>> " + str(number) + " " + one.lower())
+            logs("hxya", "info", str(datetime.datetime.now()) + " >>> " + str(number) + " " + one.lower() + "\n")
 
             if (number >= number_limit):
                 os.system("taskkill /im obs64.exe")
+                logs("hxya", "warn", "Taskkilled OBS\n")
                 print(">>>OBS is taskkilled")
+                logs("hxya", "info", ">>>OBS is taskkilled\n")
                 sys.path.append("../../")
+                logs("hxya", "warn", "System path updated to *root*\n")
                 import hxya
+                logs("hxya", "warn", "Imported hxya\n")
                 hxya.youtubemenu()
+                logs("hxya", "warn", "FINISHED BY BREAK\n")
                 break
+
         except (KeyError):
             keyerror = str( respJSON['error'].get("message") )
-            print("##FATAL ERROR##")
-            print(str(datetime.datetime.now()) + " >>> Message:")
-            print(str(keyerror))
-            print("###############")
+            logs("hxya", "error", "Fatal error JSON\n")
+
+            crash("fatal", stwo, str(datetime.datetime.now()), keyerror)
+
+            print("An error as occured. A crash report has been created in the crash-reports folder. A copy of the file is sending to our team.")
+            logs("hxya", "info", "An error as occured. A crash report has been created in the /crash-reports folder. A copy of the file is sending to our team.\n")
+
             break
+
 
         time.sleep(60)
 
@@ -139,10 +154,10 @@ def change():
     print('1) API Key')
     print('2) ChannelId')
     print('3) Go back')
-    which_key = int(input("HXYA>YouTube>Change keys>"))
+    which_key = int(input("HXYA>YouTube>Change keys> "))
     if (which_key == 1):
         print("Paste your new YouTube API V3 Key here: ")
-        API_KEY = input("HXYA>YouTube>Change keys>API Key>")
+        API_KEY = input("HXYA>YouTube>Change keys>API Key> ")
         if not API_KEY:
             change()
         else:
@@ -155,7 +170,7 @@ def change():
             change()
     elif (which_key == 2):
         print('Paste your YouTube Channel Id here: ')
-        ChannelId = input("HXYA>YouTube>Change keys>ChannelId>")
+        ChannelId = input("HXYA>YouTube>Change keys>ChannelId> ")
         if not ChannelId:
             change()
         else:
