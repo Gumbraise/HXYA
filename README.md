@@ -41,11 +41,11 @@ git clone https://github.com/Gumbraise/HXYA
 
 (All of these modules use *requests* and a part <a href="https://github.com/LevPasha/Instagram-API-python">*InstagramAPI*</a>)
 
-* AvailablePseudo - This module uses requests to recover the `users_id` from Instagram users that you want either by <a href="https://github.com/Gumbraise/HXYA/path/instagram/pseudos.txt">pseudos.txt</a> spaced by a line break or one by one. Then available usernames are paste in a file into the <a href="https://github.com/Gumbraise/HXYA/path/instagram/AvailablePseudos">AvailablePseudos</a>' folder.
+* AvailablePseudo - This module uses requests to recover the `users_id` from Instagram users that you want either by <a href="https://github.com/Gumbraise/HXYA/tree/master/path/instagram/pseudos.txt">pseudos.txt</a> spaced by a line break or one by one. Then available usernames are paste in a file into the <a href="https://github.com/Gumbraise/HXYA/tree/master/path/instagram/AvailablePseudos">AvailablePseudos</a>' folder.
 
 **Clear Cache**
 
-* Delete definitely all files in <a href="https://github.com/Gumbraise/HXYA/logs">logs/</a>, <a href="https://github.com/Gumbraise/HXYA/crash-reports">crash-reports/</a>, <a href="https://github.com/Gumbraise/HXYA/path/instagram/AvailablePseudos">AvailablePseudos/</a>
+* Delete definitely all files in <a href="https://github.com/Gumbraise/HXYA/tree/master/logs">logs/</a>, <a href="https://github.com/Gumbraise/HXYA/tree/master/crash-reports">crash-reports/</a>, <a href="https://github.com/Gumbraise/HXYA/tree/master/path/instagram/AvailablePseudos">AvailablePseudos/</a>
 
 ## Donate
 
