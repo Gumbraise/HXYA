@@ -10,8 +10,9 @@ import shutil
 def main():
     print('1) YouTube')
     print('2) Instagram')
-    print('3) Clear Cache')
-    print('4) Quit')
+    print('3) CCGen')
+    print('4) Clear Cache')
+    print('5) Quit')
     choice(1)
 
 def choice(cw):
@@ -22,6 +23,9 @@ def choice(cw):
         elif (c1 == 2):
             instagrammenu()
         elif (c1 == 3):
+            sys.path.append("path/ccgen/")
+            import ccgen
+        elif (c1 == 4):
             sure = input("Are you sure to clear the totality of the cache ? (y/n) ")
             if sure == "y":
                 folderl = 'logs'
@@ -73,7 +77,7 @@ def choice(cw):
                 main()
             else:
                 main()
-        elif (c1 == 4):
+        elif (c1 == 5):
             sys.exit("Please consider donating. Good bye")
         else:
             print('>>>Please use 1, 2 or 3')
@@ -160,6 +164,7 @@ def instagrammenu():
             subprocess.call([r'C:\Users\kelli\Desktop\YOUTUBE_py\path\instagram\instagramapi.bat'])
         except (FileNotFoundError):
             sys.exit('instagramapi.bat is missing. Reinstall HXYA here : https://github.com/gumbraise/HXYA')
+
 def youtubemenu():
     try:
         js = "path/youtube/keys.json"
@@ -199,20 +204,44 @@ def youtubemenu():
         print('5) ViewClose')
         choice(2)
 
-print('                             _____  ')
-print('|\     /||\     /||\     /| / ___ \ ')
-print('| |   | || \   / || \   / || |   | |')
-print('| |___| | \ \_/ /  \ \_/ / | |___| |')
-print('|  ___  |  | _ |    \   /  |  ___  |')
-print('| |   | | / / \ \    | |   | |   | |')
-print('| |   | || /   \ |   | |   | |   | |')
-print('|/     \||/     \|   \_/   |/     \|')
-print('Gumbraise©2020  GitHub.com/gumbraise')
-print('')
-print('Welcome to HXYA ' + getpass.getuser())
-print('It is ' + str(datetime.datetime.now()))
-print('If you find a bug, please report it to https://github.com/Gumbraise/HXYA/issues')
-print('Please review the README at https://github.com/Gumbraise/HXYA/README.md before proceeding')
-print('')
+def crash(type, date, time, reason):
+    try:
+        jsonFile = open("package.json")
+        package = json.load(jsonFile)
+        jsonFile.close()
+    except (FileNotFoundError):
+        sys.exit('package.json is missing. Reinstall HXYA here : https://github.com/gumbraise/HXYA')
+
+
+    crash = open("crash-reports/"+ type +"crash-"+date+"-client.yml","w+")
+    crash.write("error: "+type+"\n")
+    crash.write("items:\n")
+    crash.write("   package: hxya\n")
+    crash.write("   version: "+package['version']+"\n")
+    crash.write("   time: "+time+"\n")
+    crash.write("   reason: "+reason+"\n")
+
+try:
+    print('                             _____  ')
+    print('|\     /||\     /||\     /| / ___ \ ')
+    print('| |   | || \   / || \   / || |   | |')
+    print('| |___| | \ \_/ /  \ \_/ / | |___| |')
+    print('|  ___  |  | _ |    \   /  |  ___  |')
+    print('| |   | | / / \ \    | |   | |   | |')
+    print('| |   | || /   \ |   | |   | |   | |')
+    print('|/     \||/     \|   \_/   |/     \|')
+    print('Gumbraise©2020  GitHub.com/gumbraise')
+    print('')
+    print('Welcome to HXYA ' + getpass.getuser())
+    print('It is ' + str(datetime.datetime.now()))
+    print('If you find a bug, please report it to https://github.com/Gumbraise/HXYA/issues')
+    print('Please review the README at https://github.com/Gumbraise/HXYA/README.md before proceeding')
+    print('')
+except SyntaxError as e:
+    s = str(datetime.datetime.now())
+    stwo = s.replace(":", "-")
+
+    crash("fatal", stwo, str(datetime.datetime.now()), e)
+    sys.exit("Please update your Python to a 3.x version to launch HXYA without bugs")
 
 main()

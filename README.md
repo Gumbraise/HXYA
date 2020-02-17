@@ -43,6 +43,12 @@ git clone https://github.com/Gumbraise/HXYA
 
 * AvailablePseudo - This module uses requests to recover the `users_id` from Instagram users that you want either by <a href="https://github.com/Gumbraise/HXYA/tree/master/path/instagram/pseudos.txt">pseudos.txt</a> spaced by a line break or one by one. Then available usernames are paste in a file into the <a href="https://github.com/Gumbraise/HXYA/tree/master/path/instagram/AvailablePseudos">AvailablePseudos</a>' folder.
 
+**CCGen**
+
+* Visa - Get unlimited fake Visa credit cards
+
+* MasterCard - Get unlimited fake MasterCard credit cards
+
 **Clear Cache**
 
 * Delete definitely all files in <a href="https://github.com/Gumbraise/HXYA/tree/master/logs">logs/</a>, <a href="https://github.com/Gumbraise/HXYA/tree/master/crash-reports">crash-reports/</a>, <a href="https://github.com/Gumbraise/HXYA/tree/master/path/instagram/AvailablePseudos">AvailablePseudos/</a>

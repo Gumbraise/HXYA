@@ -64,18 +64,20 @@ def credit_card_number(prefixList):
     
     return result
 
-
-prefix_value = str(input('Choose between Visa or MasterCard: '))
+print('Choose between Visa or MasterCard')
+prefix_value = str(input('HXYA>CCGen>'))
 if prefix_value == 'Visa':
     try:
-        many = int(input('How many ?: '))
+        print ('How many ?')
+        many = int(input('HXYA>CCGen>'))
     except ValueError:
         sys.exit('Please type a number between 1-∝')
     for i in range (many):
         credit_card_number(visaPrefixList)
 elif prefix_value == 'MasterCard':
     try:
-        many = int(input('How many ?: '))
+        print ('How many ?')
+        many = int(input('HXYA>CCGen>'))
     except ValueError:
         sys.exit('Please type a number between 1-∝')
 
