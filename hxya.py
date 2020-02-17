@@ -118,10 +118,11 @@ def choice(cw):
         elif (c3 == 4):
             sys.exit(">>>Please consider donating. Good bye")
         else:
-            print('>>>Please use 1')
+            print('>>>Please use 1, 2 or 3')
             choice(cw)
     else:
         sys.exit("Error #1. Please report your error to https://github.com/Gumbraise/HXYA/issues with a screenshot of the console")
+
 def instagrammenu():
     try:
         try:
@@ -133,25 +134,25 @@ def instagrammenu():
             sys.exit('keys.json is missing. Reinstall HXYA here : https://github.com/gumbraise/HXYA')
         if (keys['perso'] == "none"):
             print("Paste your Instagram Username here: ")
-            API_KEY = input("HXYA>Instagram>Change keys>Username>")
-            if not API_KEY:
-                youtubemenu()
+            username = input("HXYA>Instagram>Change keys>Username>")
+            if not username:
+                instagrammenu()
             else:
-                print('Paste your YouTube Channel Id here: ')
-                ChannelId = input("HXYA>Instgram>Change keys>Password>")
-                if not ChannelId:
-                    youtubemenu()
+                print('Paste your Instagram Password here: ')
+                password = input("HXYA>Instgram>Change keys>Password>")
+                if not password:
+                    instagrammenu()
                 else:
                     tmp_perso = keys["perso"]
                     keys["perso"] = "True"
-                    tmp_api_key = keys["API_KEY"]
-                    keys["API_KEY"] = API_KEY
-                    tmp_channelid = keys["ChannelId"]
-                    keys["ChannelId"] = ChannelId
+                    tmp_username = keys["username"]
+                    keys["username"] = username
+                    tmp_password = keys["password"]
+                    keys["password"] = password
                     jsonFile = open(js, "w")
                     jsonFile.write(json.dumps(keys))
                     jsonFile.close()
-                    youtubemenu()
+                    instagrammenu()
         else:
             import InstagramAPI
             print('1) AvailablePseudo         4) Quit')
