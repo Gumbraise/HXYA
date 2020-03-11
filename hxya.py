@@ -1,127 +1,152 @@
-import os
-import requests
-import json
-import time
-import sys
-import getpass
-import datetime
-import shutil
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
-def main():
-    print('1) YouTube')
-    print('2) Instagram')
-    print('3) CCGen')
-    print('4) Clear Cache')
-    print('5) Quit')
-    choice(1)
+from lib.menu import pyVer, clear, menu
+from lib.youtube import inity
+from lib.instagram import initi
+from lib.ccg import initcc
+from lib.config import initco
+from lib.cache import initca
 
-def choice(cw):
-    if(cw == 1):
-        c1 = int(input("HXYA>"))
-        if (c1 == 1):
-            youtubemenu()
-        elif (c1 == 2):
-            instagrammenu()
-        elif (c1 == 3):
-            sys.path.append("path/ccgen/")
-            import ccgen
-        elif (c1 == 4):
-            sure = input("Are you sure to clear the totality of the cache ? (y/n) ")
-            if sure == "y":
-                folderl = 'logs'
-                for filenamel in os.listdir(folderl):
-                    file_pathl = os.path.join(folderl, filenamel)
-                    try:
-                        if os.path.isfile(file_pathl) or os.path.islink(file_pathl):
-                            os.unlink(file_pathl)
-                        elif os.path.isdir(file_pathl):
-                            shutil.rmtree(file_pathl)
-                    except:
-                        sys.exit("Error #2. Please report your error to https://github.com/Gumbraise/HXYA/issues with a screenshot of the console")
-                logsrecreate = open("logs/README.md","w+")
-                logsrecreate.write("# HXYA/logs\n\n")
-                logsrecreate.write("Here you're gonna find all your logs after have launched the software")
-                logsrecreate.close()
+import os, requests, json, time, sys, datetime
+from colorama import init, Fore, Back, Style
 
-                foldercr = 'crash-reports'
-                for filenamecr in os.listdir(foldercr):
-                    file_pathcr = os.path.join(foldercr, filenamecr)
-                    try:
-                        if os.path.isfile(file_pathcr) or os.path.islink(file_pathcr):
-                            os.unlink(file_pathcr)
-                        elif os.path.isdir(file_pathcr):
-                            shutil.rmtree(file_pathcr)
-                    except:
-                        sys.exit("Error #2. Please report your error to https://github.com/Gumbraise/HXYA/issues with a screenshot of the console")
-                crashrecreate = open("crash-reports/README.md","w+")
-                crashrecreate.write("# HXYA/crash-reports\n\n")
-                crashrecreate.write("Here you're gonna find all your crashes after have launched the software and got errors")
-                crashrecreate.close()
+pyVer()
 
-                foldera = 'path/instagram/AvailablePseudos'
-                for filenamea in os.listdir(foldera):
-                    file_patha = os.path.join(foldera, filenamea)
-                    try:
-                        if os.path.isfile(file_patha) or os.path.islink(file_patha):
-                            os.unlink(file_patha)
-                        elif os.path.isdir(file_patha):
-                            shutil.rmtree(file_patha)
-                    except:
-                        sys.exit("Error #2. Please report your error to https://github.com/Gumbraise/HXYA/issues with a screenshot of the console")
-                pseudosrecreate = open("path/instagram/AvailablePseudos/README.md","w+")
-                pseudosrecreate.write("# HXYA/path/instagram/AvailablePseudos\n\n")
-                pseudosrecreate.write("Here you're gonna find all your Instagram available pseudos that you trieds")
-                pseudosrecreate.close()
-                
-                print('Cache cleared')
-                main()
+mainMenu = """
+ ╔═════════════Welcome to HXYA═════════════╗               %s.-----...........---. %s
+ ║                                         ║               %s/`  ;:%s           `/ / %s
+ ║   %s1%s. Instagram                          ║          %s/`       ::%s        `/     :`%s
+ ║   %s2%s. YouTube                            ║      %s/`           ;:%s     /;        :`%s
+ ║   %s3%s. CCG                                ║   %s/`              :;%s`/             :`%s
+ ║                                         ║  %s:                %s;:              -/%s
+ ║   Options:                              ║  %s:            /:  %s::           -/ %s
+ ║   %s4%s. Configure keys...                  ║  %s:      /:        %s;:        -/     %s
+ ║   %s5%s. Clear Cache                        ║   %s/ ;/            %s::    ./        %s
+ ║                                         ║  %s.------.......------%s./             %s
+ ║   Window Options:                       ║
+ ║   %s6%s. Clear                              ║
+ ║   %s7%s. Quit                               ║
+ ║                                         ║
+ ║                                         ║
+ ║                                         ║
+ ║                                         ║
+ ╚══════════GitHub.com/Gumbraise═══════════╝
+""" % (
+        Fore.BLACK, Fore.RESET,
+        Fore.BLUE, Fore.RED, Fore.RESET,
+        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
+        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
+        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
+        Fore.BLUE, Fore.RED, Fore.RESET,
+        Fore.BLUE, Fore.RED, Fore.RESET,
+        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
+        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
+        Fore.BLACK, Fore.RED, Fore.RESET,
+        Style.BRIGHT, Style.RESET_ALL, 
+        Style.BRIGHT, Style.RESET_ALL
+    )
+
+youtubeMenu = """
+ ╔═════════════════YouTube═════════════════╗               %s.-----...........---. %s
+ ║                                         ║               %s/`  ;:%s           `/ / %s
+ ║   %s1%s. LikeClose                          ║          %s/`       ::%s        `/     :`%s
+ ║   %s2%s. DislikeClose                       ║      %s/`           ;:%s     /;        :`%s
+ ║   %s3%s. SubClose                           ║   %s/`              :;%s`/             :`%s
+ ║   %s4%s. CommentClose                       ║  %s:                %s;:              -/%s
+ ║   %s5%s. SubClose                           ║  %s:            /:  %s::           -/ %s
+ ║                                         ║  %s:      /:        %s;:        -/     %s
+ ║   Options:                              ║   %s/ ;/            %s::    ./        %s
+ ║   %s6%s. Configure keys...                  ║  %s.------.......------%s./             %s
+ ║                                         ║
+ ║   Window Options:                       ║
+ ║   %s7%s. Clear                              ║
+ ║   %s8%s. Quit                               ║
+ ║                                         ║
+ ║                                         ║
+ ║                                         ║
+ ║                                         ║
+ ╚══════════GitHub.com/Gumbraise═══════════╝
+""" % (
+        Fore.BLACK, Fore.RESET,
+        Fore.BLUE, Fore.RED, Fore.RESET,
+        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
+        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
+        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
+        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
+        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
+        Fore.BLUE, Fore.RED, Fore.RESET,
+        Fore.BLUE, Fore.RED, Fore.RESET,
+        Style.BRIGHT, Style.RESET_ALL, Fore.BLACK, Fore.RED, Fore.RESET,
+        Style.BRIGHT, Style.RESET_ALL, 
+        Style.BRIGHT, Style.RESET_ALL
+    )
+instagramMenu = """
+ ╔════════════════Instagram════════════════╗               %s.-----...........---. %s
+ ║                                         ║               %s/`  ;:%s           `/ / %s
+ ║   %s1%s. Available Pseudos                  ║          %s/`       ::%s        `/     :`%s
+ ║                                         ║      %s/`           ;:%s     /;        :`%s
+ ║   Options:                              ║   %s/`              :;%s`/             :`%s
+ ║   %s2%s. Configure keys...                  ║  %s:                %s;:              -/%s
+ ║                                         ║  %s:            /:  %s::           -/ %s
+ ║   Window Options:                       ║  %s:      /:        %s;:        -/     %s
+ ║   %s3%s. Clear                              ║   %s/ ;/            %s::    ./        %s
+ ║   %s4%s. Quit                               ║  %s.------.......------%s./             %s
+ ║                                         ║
+ ║                                         ║
+ ║                                         ║
+ ║                                         ║
+ ╚══════════GitHub.com/Gumbraise═══════════╝
+""" % (
+        Fore.BLACK, Fore.RESET,
+        Fore.BLUE, Fore.RED, Fore.RESET,
+        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
+        Fore.BLUE, Fore.RED, Fore.RESET,
+        Fore.BLUE, Fore.RED, Fore.RESET,
+        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
+        Fore.BLUE, Fore.RED, Fore.RESET,
+        Fore.BLUE, Fore.RED, Fore.RESET,
+        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
+        Style.BRIGHT, Style.RESET_ALL, Fore.BLACK, Fore.RED, Fore.RESET,
+    )
+
+clear()
+menu()
+print (mainMenu)
+
+try:
+    while True:
+        try:
+            c = int(input (" HXYA>"))
+            if (c == 1):
+                clear()
+                print (instagramMenu)
+            elif (c == 2):
+                clear()
+                print (youtubeMenu)
+            elif (c == 3):
+                initcc()
+            elif (c == 4):
+                initco()
+            elif (c == 5):
+                c = input (" Are you sure to clear the totality of the cache ? (y/n) ")
+                if c == "y":
+                    initca()
+                else:
+                    print (" Cancelled")
+            elif (c == 6):
+                print (" Soon...")
+            elif (c == 7):
+                sys.exit(" Please consider donating. Good bye")
             else:
-                main()
-        elif (c1 == 5):
-            sys.exit("Please consider donating. Good bye")
-        else:
-            print('>>>Please use 1, 2 or 3')
-            choice(cw)
-    elif(cw == 2):
-        c2 = int(input("HXYA>YouTube>"))
-        sys.path.append("path/youtube/")
-        import hxya_youtube
-        if (c2 == 1):
-            hxya_youtube.video("like")
-        elif (c2 == 2):
-            hxya_youtube.video("dislike")
-        elif (c2 == 3):
-            hxya_youtube.channel("sub")
-        elif (c2 == 4):
-            hxya_youtube.video("comment")
-        elif (c2 == 5):
-            hxya_youtube.video("view")
-        elif (c2 == 6):
-            hxya_youtube.change()
-        elif (c2 == 7):
-            main()
-        elif (c2 == 8):
-            sys.exit(">>>Please consider donating. Good bye")
-        else:
-            print('>>>Please use 1, 2, 3, 4, 5, 6, 7 or 8')
-            choice(cw)
-    elif(cw == 3):
-        c3 = int(input("HXYA>Instagram>"))
-        sys.path.append("path/instagram/")
-        import hxya_instagram
-        if (c3 == 1):
-            hxya_instagram.availablePseudo()
-        elif (c3 == 2):
-            hxya_instagram.change()
-        elif (c3 == 3):
-            main()
-        elif (c3 == 4):
-            sys.exit(">>>Please consider donating. Good bye")
-        else:
-            print('>>>Please use 1, 2 or 3')
-            choice(cw)
-    else:
-        sys.exit("Error #1. Please report your error to https://github.com/Gumbraise/HXYA/issues with a screenshot of the console")
+                print(' Please use an integer which is between 1 and 7')
+        except ValueError:
+            print(' Please use an integer')
+        except EOFError:
+            print(' Please use an integer')
+
+except KeyboardInterrupt:
+    sys.exit("\n Please consider donating. Good bye")
 
 def instagrammenu():
     try:
@@ -167,6 +192,7 @@ def instagrammenu():
             sys.exit('instagramapi.bat is missing. Reinstall HXYA here : https://github.com/gumbraise/HXYA')
 
 def youtubemenu():
+
     try:
         js = "path/youtube/keys.json"
         jsonFile = open(js)
@@ -204,45 +230,3 @@ def youtubemenu():
         print('4) CommentClose')
         print('5) ViewClose')
         choice(2)
-
-def crash(type, date, time, reason):
-    try:
-        jsonFile = open("package.json")
-        package = json.load(jsonFile)
-        jsonFile.close()
-    except (FileNotFoundError):
-        sys.exit('package.json is missing. Reinstall HXYA here : https://github.com/gumbraise/HXYA')
-
-
-    crash = open("crash-reports/"+ type +"crash-"+date+"-client.yml","w+")
-    crash.write("error: "+type+"\n")
-    crash.write("items:\n")
-    crash.write("   package: hxya\n")
-    crash.write("   version: "+package['version']+"\n")
-    crash.write("   time: "+time+"\n")
-    crash.write("   reason: "+reason+"\n")
-
-try:
-    print('                             _____  ')
-    print('|\     /||\     /||\     /| / ___ \ ')
-    print('| |   | || \   / || \   / || |   | |')
-    print('| |___| | \ \_/ /  \ \_/ / | |___| |')
-    print('|  ___  |  | _ |    \   /  |  ___  |')
-    print('| |   | | / / \ \    | |   | |   | |')
-    print('| |   | || /   \ |   | |   | |   | |')
-    print('|/     \||/     \|   \_/   |/     \|')
-    print('Gumbraise©2020  GitHub.com/gumbraise')
-    print('')
-    print('Welcome to HXYA ' + getpass.getuser())
-    print('It is ' + str(datetime.datetime.now()))
-    print('If you find a bug, please report it to https://github.com/Gumbraise/HXYA/issues')
-    print('Please review the README at https://github.com/Gumbraise/HXYA/README.md before proceeding')
-    print('')
-except SyntaxError as e:
-    s = str(datetime.datetime.now())
-    stwo = s.replace(":", "-")
-
-    crash("fatal", stwo, str(datetime.datetime.now()), e)
-    sys.exit("Please update your Python to a 3.x version to launch HXYA without bugs")
-
-main()
