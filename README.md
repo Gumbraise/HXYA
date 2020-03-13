@@ -1,22 +1,37 @@
-# HXYA
-
-**A Python select menu for easy fun and quick API social updates**
+<p align="center"><img src="https://user-images.githubusercontent.com/34947108/76500790-795cd400-6441-11ea-95af-7370a7fd664b.png" width="400px"></p>
 
 ## Requirements:
 
 * requests
 
-* <a href="https://console.developers.google.com/apis/library/youtube.googleapis.com?id=125bab65-cfb6-4f25-9826-4dcc309bc508&project=python-264312">YouTube API Key V3</a>
+* colorama
 
 * <a href="https://github.com/LevPasha/Instagram-API-python">InstagramAPI</a>
 
+* <a href="https://console.developers.google.com/apis/library/youtube.googleapis.com?id=125bab65-cfb6-4f25-9826-4dcc309bc508&project=python-264312">YouTube API Key V3</a>
+
 ## How to use?
 
-Download it from https://github.com/Gumbraise/HXYA, extract it and run the script.
-Or use git clone:
-
+### Windows Install
 ```
 git clone https://github.com/Gumbraise/HXYA
+cd ./HXYA
+python3 -m pip install -r requirements.txt
+python3 .\hxya.py
+```
+### Linux Install
+```
+wget https://raw.githubusercontent.com/Gumbraise/HXYA/master/
+cd ./HXYA
+python3 -m pip install -r requirements.txt
+python3 .\hxya.py
+```
+OR 
+```
+git clone https://github.com/Gumbraise/HXYA
+cd ./HXYA
+python3 -m pip install -r requirements.txt
+python3 .\hxya.py
 ```
 
 ## Module detail
