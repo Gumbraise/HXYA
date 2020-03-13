@@ -28,10 +28,11 @@ def menu():
  | |   | || /   \ |   | |   | |   | |          Please review the README at 
  |/     \||/     \|   \_/   |/     \|          https://github.com/Gumbraise/HXYA/README.md before proceeding
  
-    """ % (
+    %s""" % (
         Style.DIM,
         str(getpass.getuser()), 
         str(date.today()),
+		Style.RESET_ALL
         )
 
     print (menu)

@@ -3,9 +3,9 @@
 
 from lib.menu import pyVer, clear, menu
 from lib.youtube import inity
-from lib.instagram import initi
+from lib.instagram import avaPse
 from lib.ccg import initcc
-from lib.config import initco
+from lib.config import config
 from lib.cache import initca
 
 import os, requests, json, time, sys, datetime
@@ -25,8 +25,8 @@ mainMenu = """
  ║   %s5%s. Clear Cache                        ║   %s/ ;/            %s::    ./        %s
  ║                                         ║  %s.------.......------%s./             %s
  ║   Window Options:                       ║
- ║   %s6%s. Clear                              ║
- ║   %s7%s. Quit                               ║
+ ║   %sC%s. Clear                              ║
+ ║   %sQ%s. Quit                               ║
  ║                                         ║
  ║                                         ║
  ║                                         ║
@@ -60,8 +60,9 @@ youtubeMenu = """
  ║   %s6%s. Configure keys...                  ║  %s.------.......------%s./             %s
  ║                                         ║
  ║   Window Options:                       ║
- ║   %s7%s. Clear                              ║
- ║   %s8%s. Quit                               ║
+ ║   %sC%s. Clear                              ║
+ ║   %sB%s. Back                               ║
+ ║   %sQ%s. Quit                               ║
  ║                                         ║
  ║                                         ║
  ║                                         ║
@@ -79,8 +80,10 @@ youtubeMenu = """
         Fore.BLUE, Fore.RED, Fore.RESET,
         Style.BRIGHT, Style.RESET_ALL, Fore.BLACK, Fore.RED, Fore.RESET,
         Style.BRIGHT, Style.RESET_ALL, 
+        Style.BRIGHT, Style.RESET_ALL, 
         Style.BRIGHT, Style.RESET_ALL
     )
+
 instagramMenu = """
  ╔════════════════Instagram════════════════╗               %s.-----...........---. %s
  ║                                         ║               %s/`  ;:%s           `/ / %s
@@ -90,8 +93,9 @@ instagramMenu = """
  ║   %s2%s. Configure keys...                  ║  %s:                %s;:              -/%s
  ║                                         ║  %s:            /:  %s::           -/ %s
  ║   Window Options:                       ║  %s:      /:        %s;:        -/     %s
- ║   %s3%s. Clear                              ║   %s/ ;/            %s::    ./        %s
- ║   %s4%s. Quit                               ║  %s.------.......------%s./             %s
+ ║   %sC%s. Clear                              ║   %s/ ;/            %s::    ./        %s
+ ║   %sB%s. Back                               ║  %s.------.......------%s./             %s
+ ║   %sQ%s. Quit                               ║
  ║                                         ║
  ║                                         ║
  ║                                         ║
@@ -108,8 +112,9 @@ instagramMenu = """
         Fore.BLUE, Fore.RED, Fore.RESET,
         Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
         Style.BRIGHT, Style.RESET_ALL, Fore.BLACK, Fore.RED, Fore.RESET,
+        Style.BRIGHT, Style.RESET_ALL
     )
-
+    
 clear()
 menu()
 print (mainMenu)
@@ -117,33 +122,48 @@ print (mainMenu)
 try:
     while True:
         try:
-            c = int(input (" HXYA>"))
-            if (c == 1):
+            c = input (" HXYA>").lower()
+
+            if (c == '1'):
                 clear()
+                menu()
                 print (instagramMenu)
-            elif (c == 2):
+                while True:
+                    c = input (" HXYA>Instagram>").lower()
+                    if c == '1':
+                        clear()
+                        menu()
+                        avaPse()
+                    elif c == '2':
+                        clear()
+                        menu()
+                        config('instagram')
+                    else:
+                        print(' Please use an integer which is between 1 and 2 or C or Q')
+            elif (c == '2'):
                 clear()
+                menu()
                 print (youtubeMenu)
-            elif (c == 3):
+                while True:
+                    c = input (" HXYA>YouTube>").lower()
+            elif (c == '3'):
                 initcc()
-            elif (c == 4):
+            elif (c == '4'):
                 initco()
-            elif (c == 5):
+            elif (c == '5'):
                 c = input (" Are you sure to clear the totality of the cache ? (y/n) ")
                 if c == "y":
                     initca()
                 else:
                     print (" Cancelled")
-            elif (c == 6):
+            elif (c == 'c'):
                 print (" Soon...")
-            elif (c == 7):
+            elif (c == 'q'):
                 sys.exit(" Please consider donating. Good bye")
             else:
-                print(' Please use an integer which is between 1 and 7')
-        except ValueError:
-            print(' Please use an integer')
+                print(' Please use an integer which is between 1 and 7 or C or Q')
         except EOFError:
-            print(' Please use an integer')
+            print(' Please use an integer or C or Q')
 
 except KeyboardInterrupt:
     sys.exit("\n Please consider donating. Good bye")
