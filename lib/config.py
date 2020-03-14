@@ -117,7 +117,95 @@ def config(e):
             elif (which_key == 'q'):
                 sys.exit(" Please consider donating. Good bye")
     elif e == 'youtube':
-        print('youtube')
+        youtubeMenu = """
+ ╔═════════════════YouTube═════════════════╗               %s.-----...........---. %s
+ ║                                         ║               %s/`  ;:%s           `/ / %s
+ ║   %s1%s. LikeClose                          ║          %s/`       ::%s        `/     :`%s
+ ║   %s2%s. DislikeClose                       ║      %s/`           ;:%s     /;        :`%s
+ ║   %s3%s. SubClose                           ║   %s/`              :;%s`/             :`%s
+ ║   %s4%s. CommentClose                       ║  %s:                %s;:              -/%s
+ ║   %s5%s. ViewClose                          ║  %s:            /:  %s::           -/ %s
+ ║                                         ║  %s:      /:        %s;:        -/     %s
+ ║   Options:                              ║   %s/ ;/            %s::    ./        %s
+ ║   %s6%s. Configure keys...                  ║  %s.------.......------%s./             %s
+ ║                                         ║
+ ║   Window Options:                       ║
+ ║   %sC%s. Clear                              ║
+ ║   %sB%s. Back                               ║
+ ║   %sQ%s. Quit                               ║
+ ║                                         ║
+ ║                                         ║
+ ║                                         ║
+ ║                                         ║
+ ╚══════════GitHub.com/Gumbraise═══════════╝
+""" % (
+        Fore.BLACK, Fore.RESET,
+        Fore.BLUE, Fore.RED, Fore.RESET,
+        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
+        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
+        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
+        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
+        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
+        Fore.BLUE, Fore.RED, Fore.RESET,
+        Fore.BLUE, Fore.RED, Fore.RESET,
+        Style.BRIGHT, Style.RESET_ALL, Fore.BLACK, Fore.RED, Fore.RESET,
+        Style.BRIGHT, Style.RESET_ALL, 
+        Style.BRIGHT, Style.RESET_ALL, 
+        Style.BRIGHT, Style.RESET_ALL
+    )
+
+        configYoutube = """
+ ╔═════════════════YouTube═════════════════╗               %s.-----...........---. %s
+ ║                                         ║               %s/`  ;:%s           `/ / %s
+ ║   %s1%s. API_KEY                            ║          %s/`       ::%s        `/     :`%s
+ ║                                         ║      %s/`           ;:%s     /;        :`%s
+ ║   Window Options:                       ║   %s/`              :;%s`/             :`%s
+ ║   %sC%s. Clear                              ║  %s:                %s;:              -/%s
+ ║   %sB%s. Back                               ║  %s:            /:  %s::           -/ %s
+ ║   %sQ%s. Quit                               ║  %s:      /:        %s;:        -/     %s
+ ║                                         ║   %s/ ;/            %s::    ./        %s
+ ║                                         ║  %s.------.......------%s./             %s
+ ║                                         ║
+ ║                                         ║
+ ╚══════════GitHub.com/Gumbraise═══════════╝
+        """ % (
+                Fore.BLACK, Fore.RESET,
+                Fore.BLUE, Fore.RED, Fore.RESET,
+                Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
+                Fore.BLUE, Fore.RED, Fore.RESET,
+                Fore.BLUE, Fore.RED, Fore.RESET,
+                Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
+                Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
+                Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
+                Fore.BLUE, Fore.RED, Fore.RESET,
+                Fore.BLACK, Fore.RED, Fore.RESET
+            )
+        print (configYoutube)
+        while True:
+            which_key = input(" HXYA>Config>").lower()
+            if (which_key == '1'):
+                print(" Paste your new API_KEY here: ")
+                API_KEY = input(" HXYA>Config>YouTube>")
+                youtube["API_KEY"] = API_KEY
+                youtubeFile = open(youtubeOpen, "w")
+                youtubeFile.write(json.dumps(youtube))
+                youtubeFile.close()
+                clear()
+                menu()
+                print(configYoutube)
+                print(' Updated!')
+            elif (which_key == 'c'):
+                clear()
+                menu()
+                print(configYoutube)
+            elif (which_key == 'b'):
+                pass
+                clear()
+                menu()
+                print(youtubeMenu)
+                break
+            elif (which_key == 'q'):
+                sys.exit(" Please consider donating. Good bye")
     else:
         mainMenu = """
  ╔═════════════Welcome to HXYA═════════════╗               %s.-----...........---. %s
@@ -154,7 +242,7 @@ def config(e):
     )
 
         configMenu = """
- ╔════════════════Instagram════════════════╗               %s.-----...........---. %s
+ ╔═════════════════Config══════════════════╗               %s.-----...........---. %s
  ║                                         ║               %s/`  ;:%s           `/ / %s
  ║   %s1%s. Instagram                          ║          %s/`       ::%s        `/     :`%s
  ║   %s2%s. YouTube                            ║      %s/`           ;:%s     /;        :`%s

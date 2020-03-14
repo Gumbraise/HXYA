@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from lib.menu import pyVer, clear, menu
-from lib.youtube import likClo#, disClo, subClo, comClo, vieClo
+from lib.youtube import likClo, disClo, subClo, comClo, vieClo
 from lib.instagram import avaPse
 from lib.ccg import ccg
 from lib.config import config
@@ -192,7 +192,23 @@ try:
                     if c == '2':
                         clear()
                         menu()
-                        ccg('mastercard')
+                        disClo()
+                    if c == '3':
+                        clear()
+                        menu()
+                        subClo()
+                    if c == '4':
+                        clear()
+                        menu()
+                        comClo()
+                    if c == '5':
+                        clear()
+                        menu()
+                        vieClo()
+                    if c == '6':
+                        clear()
+                        menu()
+                        config('youtube')
                     elif c == 'c':
                         clear()
                         menu()
