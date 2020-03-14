@@ -3,6 +3,7 @@ from InstagramAPI import InstagramAPI
 from lib.menu import clear, menu
 
 import os, requests, json, time, sys, datetime
+import lib.print as printMenu
 
 try:
     js = "file/youtube.json"
@@ -16,43 +17,6 @@ s = str(datetime.datetime.now())
 stwo = s.replace(":", "-")
 
 API_KEY = keys["API_KEY"]
-
-youtubeMenu = """
- ╔═════════════════YouTube═════════════════╗               %s.-----...........---. %s
- ║                                         ║               %s/`  ;:%s           `/ / %s
- ║   %s1%s. LikeClose                          ║          %s/`       ::%s        `/     :`%s
- ║   %s2%s. DislikeClose                       ║      %s/`           ;:%s     /;        :`%s
- ║   %s3%s. SubClose                           ║   %s/`              :;%s`/             :`%s
- ║   %s4%s. CommentClose                       ║  %s:                %s;:              -/%s
- ║   %s5%s. ViewClose                          ║  %s:            /:  %s::           -/ %s
- ║                                         ║  %s:      /:        %s;:        -/     %s
- ║   Options:                              ║   %s/ ;/            %s::    ./        %s
- ║   %s6%s. Configure keys...                  ║  %s.------.......------%s./             %s
- ║                                         ║
- ║   Window Options:                       ║
- ║   %sC%s. Clear                              ║
- ║   %sB%s. Back                               ║
- ║   %sQ%s. Quit                               ║
- ║                                         ║
- ║                                         ║
- ║                                         ║
- ║                                         ║
- ╚══════════GitHub.com/Gumbraise═══════════╝
-""" % (
-        Fore.BLACK, Fore.RESET,
-        Fore.BLUE, Fore.RED, Fore.RESET,
-        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
-        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
-        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
-        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
-        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
-        Fore.BLUE, Fore.RED, Fore.RESET,
-        Fore.BLUE, Fore.RED, Fore.RESET,
-        Style.BRIGHT, Style.RESET_ALL, Fore.BLACK, Fore.RED, Fore.RESET,
-        Style.BRIGHT, Style.RESET_ALL, 
-        Style.BRIGHT, Style.RESET_ALL, 
-        Style.BRIGHT, Style.RESET_ALL
-    )
 
 
 def likClo():
@@ -71,14 +35,14 @@ def likClo():
                 input(' Please type ENTER')
                 clear()
                 menu()
-                print(youtubeMenu)
+                print(printMenu.youtubeMenu)
                 break
         except:
             print(" An error as occured. Verify your API_KEY and update it")
             input(' Please type ENTER')
             clear()
             menu()
-            print(youtubeMenu)
+            print(printMenu.youtubeMenu)
             break
 
         time.sleep(60)
@@ -99,14 +63,14 @@ def disClo():
                 input(' Please type ENTER')
                 clear()
                 menu()
-                print(youtubeMenu)
+                print(printMenu.youtubeMenu)
                 break
         except:
             print(" An error as occured. Verify your API_KEY and update it")
             input(' Please type ENTER')
             clear()
             menu()
-            print(youtubeMenu)
+            print(printMenu.youtubeMenu)
             break
 
         time.sleep(60)
@@ -127,14 +91,14 @@ def vieClo():
                 input(' Please type ENTER')
                 clear()
                 menu()
-                print(youtubeMenu)
+                print(printMenu.youtubeMenu)
                 break
         except:
             print(" An error as occured. Verify your API_KEY and update it")
             input(' Please type ENTER')
             clear()
             menu()
-            print(youtubeMenu)
+            print(printMenu.youtubeMenu)
             break
 
         time.sleep(60)
@@ -155,14 +119,14 @@ def comClo():
                 input(' Please type ENTER')
                 clear()
                 menu()
-                print(youtubeMenu)
+                print(printMenu.youtubeMenu)
                 break
         except:
             print(" An error as occured. Verify your API_KEY and update it")
             input(' Please type ENTER')
             clear()
             menu()
-            print(youtubeMenu)
+            print(printMenu.youtubeMenu)
             break
 
         time.sleep(60)
@@ -183,14 +147,14 @@ def subClo():
                 input(' Please type ENTER')
                 clear()
                 menu()
-                print(youtubeMenu)
+                print(printMenu.youtubeMenu)
                 break
         except:
             print(" An error as occured. Verify your API_KEY and update it")
             input(' Please type ENTER')
             clear()
             menu()
-            print(youtubeMenu)
+            print(printMenu.youtubeMenu)
             break
 
         time.sleep(60)

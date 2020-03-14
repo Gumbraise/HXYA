@@ -1,53 +1,37 @@
 from colorama import init, Fore, Back, Style
 from InstagramAPI import InstagramAPI
-from lib.menu import clear, menu
+from lib.menu import clear, menu, insta
+
+import lib.print as printMenu
 
 import os, requests, json, time, sys, datetime
 
 try:
-    js = "file/instagram.json"
-    jsonFile = open(js)
-    keys = json.load(jsonFile)
-    jsonFile.close()
+    instaOpen = "file/instagram.json"
+    instaFile = open(instaOpen)
+    insta = json.load(instaFile)
+    instaFile.close()
 except (FileNotFoundError):
     sys.exit(' instagram.json is missing. Reinstall HXYA here : https://github.com/gumbraise/HXYA')
 
 s = str(datetime.datetime.now())
 stwo = s.replace(":", "-")
 
-username = keys["username"]
-password = keys["password"]
+username = insta["username"]
+password = insta["password"]
 
-instagramMenu = """
- ╔════════════════Instagram════════════════╗               %s.-----...........---. %s
- ║                                         ║               %s/`  ;:%s           `/ / %s
- ║   %s1%s. Available Pseudos                  ║          %s/`       ::%s        `/     :`%s
- ║                                         ║      %s/`           ;:%s     /;        :`%s
- ║   Options:                              ║   %s/`              :;%s`/             :`%s
- ║   %s2%s. Configure keys...                  ║  %s:                %s;:              -/%s
- ║                                         ║  %s:            /:  %s::           -/ %s
- ║   Window Options:                       ║  %s:      /:        %s;:        -/     %s
- ║   %sC%s. Clear                              ║   %s/ ;/            %s::    ./        %s
- ║   %sB%s. Back                               ║  %s.------.......------%s./             %s
- ║   %sQ%s. Quit                               ║
- ║                                         ║
- ║                                         ║
- ║                                         ║
- ║                                         ║
- ╚══════════GitHub.com/Gumbraise═══════════╝
-""" % (
-        Fore.BLACK, Fore.RESET,
-        Fore.BLUE, Fore.RED, Fore.RESET,
-        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
-        Fore.BLUE, Fore.RED, Fore.RESET,
-        Fore.BLUE, Fore.RED, Fore.RESET,
-        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
-        Fore.BLUE, Fore.RED, Fore.RESET,
-        Fore.BLUE, Fore.RED, Fore.RESET,
-        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
-        Style.BRIGHT, Style.RESET_ALL, Fore.BLACK, Fore.RED, Fore.RESET,
-        Style.BRIGHT, Style.RESET_ALL
-    )
+if username == "0":
+    username = input(' Type your Instagram Username here: ')
+    insta["username"] = username
+    instaFile = open(instaOpen, "w")
+    instaFile.write(json.dumps(insta))
+    instaFile.close()
+if password == "0":
+    password = input(' Type your Instagram Password here: ')
+    insta["password"] = password
+    instaFile = open(instaOpen, "w")
+    instaFile.write(json.dumps(insta))
+    instaFile.close()
 
 def avaPse():
     list_ask = input (" Do you want to use 'path/Instagram/pseudo.txt' ? (y/Enter) ")
@@ -69,7 +53,7 @@ def avaPse():
             input(' Please type ENTER')
             clear()
             menu()
-            print(instagramMenu)
+            print(printMenu.instagramMenu)
         except (FileNotFoundError):
             sys.exit(' Folder is missing. Reinstall HXYA here : https://github.com/gumbraise/HXYA')
     elif (list_ask == 'y'):
@@ -93,10 +77,96 @@ def avaPse():
                     input(' Please type ENTER')
                     clear()
                     menu()
-                    print(instagramMenu)
+                    print(printMenu.instagramMenu)
             except (FileNotFoundError):
                 f = open("path/instagram/pseudos.txt","w+")
                 print(' Error, retest now please')
         except (FileNotFoundError):
             sys.exit(' Folder is missing. Reinstall HXYA here : https://github.com/gumbraise/HXYA')
 
+def bomber():
+    nostop = 0
+
+    while True:
+        try:
+            user = input(" Enter the victim's IG Username then press ENTER: ")
+            url = "https://www.instagram.com/web/search/topsearch/?context=blended&query="+user+"&rank_token=0.3953592318270893&count=1"
+            response = requests.get(url)
+            respJSON = response.json()
+            user_id = str( respJSON['users'][0].get("user").get("pk") )
+            break
+        except:
+            print(' Please type real Instagram username')
+
+
+    message = input(" Put the message you want the software send and press ENTER: ")
+
+    times = int(input(" How many messages do you want to send? "))
+
+    print(" You are gonna STRESS", times,"times", user_id, "with the message: ", message, ".")
+    input(" Are you sure?")
+
+    try:
+        while times > nostop:
+            nostop = nostop + 1
+            try:
+                insta.api.sendMessage(user_id,message)
+            except:
+                clear()
+                menu()
+                print (" An error occurred. Be sure that your Instagram creditentials are true. Else, modify them into the Config Menu")
+                clear()
+                menu()
+                print (printMenu.instagramMenu)
+
+            print(" "+nostop, ">> Sent to", user, ": ", message)
+    except:
+        clear()
+        menu()
+        print(" An error occurred. You probably didn't install Instagraminsta.api correctly")
+        input(" Please type ENTER")
+        clear()
+        menu()
+        print(printMenu.instagramMenu)
+
+def unfollow():
+    
+    try:
+        following = insta.api.getSelfUsersFollowing()
+    except:
+        clear()
+        menu()
+        print (" An error occurred. Be sure that your Instagram creditentials are true. Else, modify them into the Config Menu")
+        clear()
+        menu()
+        print (printMenu.instagramMenu)
+
+    for item in following["users"]:
+        user = item["pk"]
+        username = item["username"]
+
+        insta.api.unfollow(user)
+        print(" "+username + " is now unfollowed")
+
+def wdnfm():
+    following_list = []
+    followers_list = []
+
+    try:
+        following = insta.api.getSelfUsersFollowing()
+        followers = insta.api.getSelfUserFollowers()
+    except:
+        clear()
+        menu()
+        print (" An error occurred. Be sure that your Instagram credentials are true. Else, modify them into the Config Menu")
+
+    for item in following["users"]:
+        following_list.append(item["username"])
+    for item2 in followers["users"]:
+        followers_list.append(item2["username"])
+
+    print ((set(following_list) - set(followers_list)))
+    input (" Please type ENTER")
+    clear()
+    menu()
+    print(printMenu.instagramMenu)

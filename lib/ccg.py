@@ -3,36 +3,10 @@ from colorama import init, Fore, Back, Style
 
 import math, random, datetime, sys
 
+import lib.print as printMenu
+
 visaPrefixList = [4539,4556,4916,4532,4929,40240071,4485,4716,4]
 mastercardPrefixList = [51,52,53,54,55,2221,2222,2223,2224,2225,2226,2227,2228,2229,223,224,225,226,227,228,229,23,24,25,26,270,271,2720]
-
-ccgMenu = """
- ╔═══════════════════CCG═══════════════════╗               %s.-----...........---. %s
- ║                                         ║               %s/`  ;:%s           `/ / %s
- ║   %s1%s. Visa                               ║          %s/`       ::%s        `/     :`%s
- ║   %s2%s. MasterCard                         ║      %s/`           ;:%s     /;        :`%s
- ║                                         ║   %s/`              :;%s`/             :`%s
- ║   Window Options:                       ║  %s:                %s;:              -/%s
- ║   %sC%s. Clear                              ║  %s:            /:  %s::           -/ %s
- ║   %sB%s. Back                               ║  %s:      /:        %s;:        -/     %s
- ║   %sQ%s. Quit                               ║   %s/ ;/            %s::    ./        %s
- ║                                         ║  %s.------.......------%s./             %s
- ║                                         ║
- ║                                         ║
- ║                                         ║
- ╚══════════GitHub.com/Gumbraise═══════════╝
-""" % (
-        Fore.BLACK, Fore.RESET,
-        Fore.BLUE, Fore.RED, Fore.RESET,
-        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
-        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
-        Fore.BLUE, Fore.RED, Fore.RESET,
-        Fore.BLUE, Fore.RED, Fore.RESET,
-        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
-        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
-        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
-        Fore.BLACK, Fore.RED, Fore.RESET
-    )
 
 def completed_number(prefix, length):
     ccnumber = str(prefix)
@@ -106,7 +80,7 @@ def ccg(e):
                 input(' Please type ENTER')
                 clear()
                 menu()
-                print(ccgMenu)
+                print(printMenu.ccgMenu)
                 break
                 
             except ValueError:
@@ -121,7 +95,7 @@ def ccg(e):
                 input(' Please type ENTER')
                 clear()
                 menu()
-                print(ccgMenu)
+                print(printMenu.ccgMenu)
                 break
 
             except ValueError:
