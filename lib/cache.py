@@ -9,8 +9,6 @@ def initca():
                 os.unlink(file_patha)
             elif os.path.isdir(file_patha):
                 shutil.rmtree(file_patha)
-            print (' Cache Cleared')
         except:
-            sys.exit("Error #2. Please report your error to https://github.com/Gumbraise/HXYA/issues with a screenshot of the console")
-
+            sys.exit(" Error #2. Please report your error to https://github.com/Gumbraise/HXYA/issues with a screenshot of the console")
     print (' Cache Cleared')

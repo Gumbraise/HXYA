@@ -36,6 +36,12 @@ python3 .\hxya.py
 
 ## Module detail
 
+**Instagram**
+
+(All of these modules use *requests* and a part <a href="https://github.com/LevPasha/Instagram-API-python">*InstagramAPI*</a>)
+
+* AvailablePseudo - This module uses requests to recover the `users_id` from Instagram users that you want either by <a href="https://github.com/Gumbraise/HXYA/tree/master/path/instagram/pseudos.txt">pseudos.txt</a> spaced by a line break or one by one. Then available usernames are paste in a file into the <a href="https://github.com/Gumbraise/HXYA/tree/master/path/instagram/AvailablePseudos">AvailablePseudos</a>' folder. Valid pseudos are marked by a "V" and false by a "X".
+
 **YouTube**
 
 (All of these modules use *requests*)
@@ -52,12 +58,6 @@ python3 .\hxya.py
 
 * Change keys - In this menu you could chang your YouTube API Key V3 or your ChannelId. To change the VideoId, choose another video menu and type *y* to change the VideoId
 
-**Instagram**
-
-(All of these modules use *requests* and a part <a href="https://github.com/LevPasha/Instagram-API-python">*InstagramAPI*</a>)
-
-* AvailablePseudo - This module uses requests to recover the `users_id` from Instagram users that you want either by <a href="https://github.com/Gumbraise/HXYA/tree/master/path/instagram/pseudos.txt">pseudos.txt</a> spaced by a line break or one by one. Then available usernames are paste in a file into the <a href="https://github.com/Gumbraise/HXYA/tree/master/path/instagram/AvailablePseudos">AvailablePseudos</a>' folder.
-
 **CCGen**
 
 * Visa - Get unlimited fake Visa credit cards
@@ -66,7 +66,7 @@ python3 .\hxya.py
 
 **Clear Cache**
 
-* Delete definitely all files in <a href="https://github.com/Gumbraise/HXYA/tree/master/logs">logs/</a>, <a href="https://github.com/Gumbraise/HXYA/tree/master/crash-reports">crash-reports/</a>, <a href="https://github.com/Gumbraise/HXYA/tree/master/path/instagram/AvailablePseudos">AvailablePseudos/</a>
+* Delete definitely all files in <a href="https://github.com/Gumbraise/HXYA/tree/master/path/instagram/AvailablePseudos">AvailablePseudos/</a>
 
 ## Donate
 

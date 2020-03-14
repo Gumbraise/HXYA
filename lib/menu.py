@@ -27,7 +27,6 @@ def menu():
  | |   | | / / \ \    | |   | |   | |          
  | |   | || /   \ |   | |   | |   | |          Please review the README at 
  |/     \||/     \|   \_/   |/     \|          https://github.com/Gumbraise/HXYA/README.md before proceeding
- 
     %s""" % (
         Style.DIM,
         str(getpass.getuser()), 
