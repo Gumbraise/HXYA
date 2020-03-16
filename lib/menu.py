@@ -1,23 +1,7 @@
 import sys, os, getpass, json
-from InstagramAPI import InstagramAPI
+from lib.InstagramAPI.InstagramAPI import InstagramAPI
 from colorama import Fore, Style
 from datetime import date
-
-def insta():
-	try:
-		instaOpen = "file/instagram.json"
-		instaFile = open(instaOpen)
-		insta = json.load(instaFile)
-		instaFile.close()
-	except (FileNotFoundError):
-		sys.exit(' instagram.json is missing. Reinstall HXYA here : https://github.com/gumbraise/HXYA')
-
-	username = insta["username"]
-	password = insta["password"]
-
-	api = InstagramAPI(username, password)
-	api.login()
-
 
 def pyVer():
 	version = sys.version[:1]

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from lib.menu import pyVer, clear, menu, insta
-from lib.youtube import likClo, disClo, subClo, comClo, vieClo
-from lib.instagram import avaPse, bomber, wdnfm, unfollow
-from lib.ccg import ccg
+from lib.menu import pyVer, clear, menu
+from core.youtube import likClo, disClo, subClo, comClo, vieClo
+from core.instagram import avaPse, bomber, wdnfm, unfollow
+from core.ccg import ccg
 from lib.config import config
 from lib.cache import initca
 
@@ -14,7 +14,6 @@ import os, requests, json, time, sys, datetime
 from colorama import init, Fore, Back, Style
 
 pyVer()
-insta()
 
 clear()
 menu()
