@@ -21,13 +21,18 @@ API_KEY = keys["API_KEY"]
 def likClo():
     VideoId = str(input(" Paste the VideoId here: "))
     url = 'https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id='+VideoId+'&key='+API_KEY
-    number_limit = int(input(' How many likes do you want to close OBS ?: '))
+    while True:
+        try:
+            number_limit = int(input(' How many likes do you want to close OBS ?: '))
+            break;
+        except:
+            print(" Please type a real number")
     while True:
         response = requests.get(url)
         respJSON = response.json()
         try:
             number = int( respJSON['items'][0].get("statistics").get("likeCount") )
-            print(' '+str(datetime.datetime.now()) + " >>> " + str(number) + " like")
+            print(' '+str(datetime.datetime.now()) + " >>> " + str(number) + " likes")
             if (number >= number_limit):
                 os.system("taskkill /im obs64.exe")
                 print(" OBS is taskkilled")
@@ -37,19 +42,37 @@ def likClo():
                 print(printMenu.youtubeMenu)
                 break
         except:
-            print(" An error as occured. Verify your API_KEY and update it")
-            input(' Please type ENTER')
-            clear()
-            menu()
-            print(printMenu.youtubeMenu)
-            break
+            try:
+                number = str( respJSON['error'].get("error").get("code") )
+                clear()
+                menu()
+                print(" An error as occured. Verify your API_KEY and update it")
+                input(' Please type ENTER')
+                clear()
+                menu()
+                print(printMenu.youtubeMenu)
+                break
+            except:
+                clear()
+                menu()
+                print(" An error as occured. The owner of this video desactivated likes")
+                input(' Please type ENTER')
+                clear()
+                menu()
+                print(printMenu.youtubeMenu)
+                break
 
         time.sleep(60)
 
 def disClo():
     VideoId = str(input(" Paste the VideoId here: "))
     url = 'https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id='+VideoId+'&key='+API_KEY
-    number_limit = int(input(' How many dislikes do you want to close OBS ?: '))
+    while True:
+        try:
+            number_limit = int(input(' How many dislikes do you want to close OBS ?: '))
+            break;
+        except:
+            print(" Please type a real number")
     while True:
         response = requests.get(url)
         respJSON = response.json()
@@ -65,19 +88,37 @@ def disClo():
                 print(printMenu.youtubeMenu)
                 break
         except:
-            print(" An error as occured. Verify your API_KEY and update it")
-            input(' Please type ENTER')
-            clear()
-            menu()
-            print(printMenu.youtubeMenu)
-            break
+            try:
+                number = str( respJSON['error'].get("error").get("code") )
+                clear()
+                menu()
+                print(" An error as occured. Verify your API_KEY and update it")
+                input(' Please type ENTER')
+                clear()
+                menu()
+                print(printMenu.youtubeMenu)
+                break
+            except:
+                clear()
+                menu()
+                print(" An error as occured. The owner of this video desactivated dislikes")
+                input(' Please type ENTER')
+                clear()
+                menu()
+                print(printMenu.youtubeMenu)
+                break
 
         time.sleep(60)
 
 def vieClo():
     VideoId = str(input(" Paste the VideoId here: "))
     url = 'https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id='+VideoId+'&key='+API_KEY
-    number_limit = int(input(' How many likes do you want to close OBS ?: '))
+    while True:
+        try:
+            number_limit = int(input(' How many views do you want to close OBS ?: '))
+            break;
+        except:
+            print(" Please type a real number")
     while True:
         response = requests.get(url)
         respJSON = response.json()
@@ -93,19 +134,37 @@ def vieClo():
                 print(printMenu.youtubeMenu)
                 break
         except:
-            print(" An error as occured. Verify your API_KEY and update it")
-            input(' Please type ENTER')
-            clear()
-            menu()
-            print(printMenu.youtubeMenu)
-            break
+            try:
+                number = str( respJSON['error'].get("error").get("code") )
+                clear()
+                menu()
+                print(" An error as occured. Verify your API_KEY and update it")
+                input(' Please type ENTER')
+                clear()
+                menu()
+                print(printMenu.youtubeMenu)
+                break
+            except:
+                clear()
+                menu()
+                print(" An error as occured. The owner of this video desactivated views")
+                input(' Please type ENTER')
+                clear()
+                menu()
+                print(printMenu.youtubeMenu)
+                break
 
         time.sleep(60)
 
 def comClo():
     VideoId = str(input(" Paste the VideoId here: "))
     url = 'https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id='+VideoId+'&key='+API_KEY
-    number_limit = int(input(' How many likes do you want to close OBS ?: '))
+    while True:
+        try:
+            number_limit = int(input(' How many comments do you want to close OBS ?: '))
+            break;
+        except:
+            print(" Please type a real number")
     while True:
         response = requests.get(url)
         respJSON = response.json()
@@ -121,24 +180,42 @@ def comClo():
                 print(printMenu.youtubeMenu)
                 break
         except:
-            print(" An error as occured. Verify your API_KEY and update it")
-            input(' Please type ENTER')
-            clear()
-            menu()
-            print(printMenu.youtubeMenu)
-            break
+            try:
+                number = str( respJSON['error'].get("error").get("code") )
+                clear()
+                menu()
+                print(" An error as occured. Verify your API_KEY and update it")
+                input(' Please type ENTER')
+                clear()
+                menu()
+                print(printMenu.youtubeMenu)
+                break
+            except:
+                clear()
+                menu()
+                print(" An error as occured. The owner of this video desactivated comments")
+                input(' Please type ENTER')
+                clear()
+                menu()
+                print(printMenu.youtubeMenu)
+                break
 
         time.sleep(60)
 
 def subClo():
-    ChannelId = int(input(' Paste the ChannelID here: '))
+    ChannelId = str(input(' Paste the ChannelID here: '))
     url = 'https://www.googleapis.com/youtube/v3/channels?part=statistics&id='+ChannelId+'&key='+API_KEY
-    number_limit = int(input(' How many subs do you want to close OBS ?: '))
+    while True:
+        try:
+            number_limit = int(input(' How many subscribers do you want to close OBS ?: '))
+            break;
+        except:
+            print(" Please type a real number")
     while True:
         response = requests.get(url)
         respJSON = response.json()
         try:
-            number = int( respJSON['items'][0].get("statistics").get("subCount") )
+            number = int( respJSON['items'][0].get("statistics").get("subscriberCount") )
             print(' '+str(datetime.datetime.now()) + " >>> " + str(number) + " subscribers")
             if (number >= number_limit):
                 os.system("taskkill /im obs64.exe")
@@ -149,11 +226,25 @@ def subClo():
                 print(printMenu.youtubeMenu)
                 break
         except:
-            print(" An error as occured. Verify your API_KEY and update it")
-            input(' Please type ENTER')
-            clear()
-            menu()
-            print(printMenu.youtubeMenu)
-            break
+            try:
+                number = str( respJSON['error'].get("error").get("code") )
+                clear()
+                menu()
+                print(" An error as occured. Verify your API_KEY and update it")
+                input(' Please type ENTER')
+                clear()
+                menu()
+                print(printMenu.youtubeMenu)
+                break
+            except:
+                clear()
+                menu()
+                print(" An error as occured. The owner of this channel desactivated subscribers")
+                input(' Please type ENTER')
+                clear()
+                menu()
+                print(printMenu.youtubeMenu)
+                break
 
+ 
         time.sleep(60)
