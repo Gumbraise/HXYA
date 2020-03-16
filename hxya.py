@@ -97,7 +97,7 @@ try:
                     elif c == 'c':
                         clear()
                         menu()
-                        print(printMenu.ccgMenu)
+                        print(printMenu.youtubeMenu)
                     elif c == 'b':
                         clear()
                         menu()
