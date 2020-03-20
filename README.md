@@ -72,6 +72,12 @@ python3 .\hxya.py
 
 * MasterCard - Get unlimited fake MasterCard credit cards.
 
+** Mail Spammer
+
+* Spam Mail - Spam the mailbox of who you want with the email that you want. It is necessary to get an API_KEY => Requests a key by mail at mail@hxya.kellis.fr
+
+* Statistics - Get the statistics of your key.
+
 **Clear Cache**
 
 * Delete definitely all files in <a href="https://github.com/Gumbraise/HXYA/tree/master/path/instagram/AvailablePseudos">AvailablePseudos/</a>
