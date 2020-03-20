@@ -6,11 +6,12 @@ mainMenu = """
  ║   %s1%s. Instagram                          ║          %s/`       ::%s        `/     :`%s
  ║   %s2%s. YouTube                            ║      %s/`           ;:%s     /;        :`%s
  ║   %s3%s. CCG                                ║   %s/`              :;%s`/             :`%s
- ║                                         ║  %s:                %s;:              -/%s
- ║   Options:                              ║  %s:            /:  %s::           -/ %s
- ║   %s91%s. Configure keys...                 ║  %s:      /:        %s;:        -/     %s
- ║   %s92%s. Clear Cache                       ║   %s/ ;/            %s::    ./        %s
- ║                                         ║  %s.------.......------%s./             %s
+ ║   %s4%s. Mail Spammer                       ║  %s:                %s;:              -/%s
+ ║                                         ║  %s:            /:  %s::           -/ %s
+ ║   Options:                              ║  %s:      /:        %s;:        -/     %s
+ ║   %s91%s. Configure keys...                 ║   %s/ ;/            %s::    ./        %s
+ ║   %s92%s. Clear Cache                       ║  %s.------.......------%s./             %s
+ ║                                         ║
  ║   Window Options:                       ║
  ║   %sC%s. Clear                              ║
  ║   %sQ%s. Quit                               ║
@@ -25,11 +26,11 @@ mainMenu = """
         Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
         Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
         Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
+        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
         Fore.BLUE, Fore.RED, Fore.RESET,
         Fore.BLUE, Fore.RED, Fore.RESET,
         Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
-        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
-        Fore.BLACK, Fore.RED, Fore.RESET,
+        Style.BRIGHT, Style.RESET_ALL, Fore.BLACK, Fore.RED, Fore.RESET,
         Style.BRIGHT, Style.RESET_ALL, 
         Style.BRIGHT, Style.RESET_ALL
     )
@@ -219,3 +220,34 @@ configInstagram = """
                 Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
                 Fore.BLACK, Fore.RED, Fore.RESET
             )
+
+mailMenu = """
+ ╔═══════════════════Mail══════════════════╗               %s.-----...........---. %s
+ ║                                         ║               %s/`  ;:%s           `/ / %s
+ ║   %s1%s. Spam Mail                          ║          %s/`       ::%s        `/     :`%s
+ ║                                         ║      %s/`           ;:%s     /;        :`%s
+ ║   Options:                              ║   %s/`              :;%s`/             :`%s
+ ║   %s91%s. Statistics...                     ║  %s:                %s;:              -/%s
+ ║                                         ║  %s:            /:  %s::           -/ %s
+ ║   Window Options:                       ║  %s:      /:        %s;:        -/     %s
+ ║   %sC%s. Clear                              ║   %s/ ;/            %s::    ./        %s
+ ║   %sB%s. Back                               ║  %s.------.......------%s./             %s
+ ║   %sQ%s. Quit                               ║
+ ║                                         ║
+ ║                                         ║
+ ║                                         ║
+ ║                                         ║
+ ╚══════════GitHub.com/Gumbraise═══════════╝
+        """ % (
+        Fore.BLACK, Fore.RESET,
+        Fore.BLUE, Fore.RED, Fore.RESET,
+        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
+        Fore.BLUE, Fore.RED, Fore.RESET,
+        Fore.BLUE, Fore.RED, Fore.RESET,
+        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
+        Fore.BLUE, Fore.RED, Fore.RESET,
+        Fore.BLUE, Fore.RED, Fore.RESET,
+        Style.BRIGHT, Style.RESET_ALL, Fore.BLUE, Fore.RED, Fore.RESET,
+        Style.BRIGHT, Style.RESET_ALL,Fore.BLACK, Fore.RED, Fore.RESET,
+        Style.BRIGHT, Style.RESET_ALL
+    )

@@ -1,4 +1,3 @@
-from colorama import init, Fore, Back, Style
 from lib.menu import clear, menu
 
 import os, requests, json, time, sys, datetime

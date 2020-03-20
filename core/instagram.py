@@ -1,4 +1,3 @@
-from colorama import init, Fore, Back, Style
 from lib.InstagramAPI.InstagramAPI import InstagramAPI
 from lib.menu import clear, menu
 

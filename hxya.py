@@ -5,6 +5,7 @@ from lib.menu import pyVer, clear, menu
 from core.youtube import likClo, disClo, subClo, comClo, vieClo
 from core.instagram import avaPse, bomber, wdnfm, unfollow
 from core.ccg import ccg
+from core.mail import mail
 from lib.config import config
 from lib.cache import initca
 
@@ -124,6 +125,29 @@ try:
                         clear()
                         menu()
                         print(printMenu.ccgMenu)
+                    elif c == 'b':
+                        clear()
+                        menu()
+                        print (printMenu.mainMenu)
+                        break
+                    elif c == 'q':
+                        sys.exit(" Please consider donating. Good bye")
+                    else:
+                        print(' Please use a valid option')
+            elif (c == '4'):
+                clear()
+                menu()
+                print(printMenu.mailMenu)
+                while True:
+                    c = input (" HXYA>Mail>").lower()
+                    if c == '1':
+                        clear()
+                        menu()
+                        mail()
+                    elif c == 'c':
+                        clear()
+                        menu()
+                        print(printMenu.mailMenu)
                     elif c == 'b':
                         clear()
                         menu()
