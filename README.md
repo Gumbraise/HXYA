@@ -2,9 +2,9 @@
 
 ## Requirements:
 
-* requests
+* <a href="https://github.com/psf/requests">requests</a>
 
-* colorama
+* <a href="https://github.com/tartley/colorama">colorama</a>
 
 * <a href="https://github.com/LevPasha/Instagram-API-python">InstagramAPI</a>
 
@@ -42,6 +42,14 @@ python3 .\hxya.py
 
 * AvailablePseudo - This module uses requests to recover the `users_id` from Instagram users that you want either by <a href="https://github.com/Gumbraise/HXYA/tree/master/path/instagram/pseudos.txt">pseudos.txt</a> spaced by a line break or one by one. Then available usernames are paste in a file into the <a href="https://github.com/Gumbraise/HXYA/tree/master/path/instagram/AvailablePseudos">AvailablePseudos</a>' folder. Valid pseudos are marked by a "V" and false by a "X".
 
+* Message Bomber - This module uses requests to recover the `users_id` from Instagram users that you want spam by private messages. You must be connected to a Instagram account. No proxy is set for the moment.
+
+* Who Doesn't Follow Me - **DICLAMER !: It doesn't work for the moment. I'm debugging the trouble** It serves to know who in your subscriptions are not following you back.
+
+* Unfollow - **DICLAMER !: It doesn't work for the moment. I'm debugging the trouble** It serves to unfollow all your subscription list or all pseudo in a .txt file.
+
+* Configure keys - In this menu you could change your Instagram Username and Password.
+
 **YouTube**
 
 (All of these modules use *requests*)
@@ -56,13 +64,13 @@ python3 .\hxya.py
 
 * ViewClose - Same that for LikeClose
 
-* Change keys - In this menu you could chang your YouTube API Key V3 or your ChannelId. To change the VideoId, choose another video menu and type *y* to change the VideoId
+* Configure keys - In this menu you could change your YouTube API Key V3.
 
 **CCGen**
 
-* Visa - Get unlimited fake Visa credit cards
+* Visa - Get unlimited fake Visa credit cards.
 
-* MasterCard - Get unlimited fake MasterCard credit cards
+* MasterCard - Get unlimited fake MasterCard credit cards.
 
 **Clear Cache**
 
