@@ -5,7 +5,7 @@ from lib.menu import pyVer, clear, menu
 from core.youtube import likClo, disClo, subClo, comClo, vieClo
 from core.instagram import avaPse, bomber, wdnfm, unfollow
 from core.ccg import ccg
-from core.mail import mail
+from core.mail import mail, statMail
 from lib.config import config
 from lib.cache import initca
 
@@ -144,6 +144,10 @@ try:
                         clear()
                         menu()
                         mail()
+                    elif c == '91':
+                        clear()
+                        menu()
+                        statMail()
                     elif c == 'c':
                         clear()
                         menu()

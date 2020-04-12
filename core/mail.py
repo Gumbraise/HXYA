@@ -1,6 +1,7 @@
 from lib.menu import clear, menu
 import lib.print as printMenu
 import requests
+import random
 
 def mail():
     clear()
@@ -8,26 +9,53 @@ def mail():
     To = input('To: ')
     Subject = input('Subject: ')
     Message = input('Message: ')
-    From = input('From: ')
-    i = int(0)
+
+    caracteres = "azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN0123456789"
+    longueur = 10
+    mdp = ""
+    compteur = 0
+    
+    while compteur < longueur:
+        lettre = caracteres[random.randint(0, len(caracteres)-1)]
+        mdp += lettre
+        compteur += 1
+ 
+    fromj = mdp+"@gumbraise.fr"
 
     while True:
         try:
-            url = 'https://mail.kellis.fr?key'+API_KEY
-            data = {'to':To,
+            url = 'http://mail.kellis.fr/?key='+API_KEY+'&mail=simple'
+            data = {
+                    'to':To,
                     'subject':Subject,
                     'message':Message,
-                    'From':From}
+                    'from':fromj}
             r = requests.post(url = url, data = data)
 
-            if (r.text == 'yes'):
-                i += 1
-                print (str(i))
-            else:
-                print ('Not sent')
+            data2 = r.json()
+
+            try:
+                if (str(data2['code']) == '200'):
+                    print ('Mail sent. Type CTRL+C to stop flooding')
+            except:
+                clear()
+                print ('An error has occurred')
+                print ('Reason:')
+                print ('    '+str(data2['error']['errors']['0']['reason']))
+                print ('Message error:')
+                print ('    '+str(data2['error']['message']))
+                print ('Error code:')
+                print ('    '+str(data2['error']['errors']['code']))
+                input('Type ENTER to exit')
+                clear()
+                menu()
+                print (printMenu.mailMenu)
+                break
         except KeyboardInterrupt:
             clear()
             menu()
             print (printMenu.mailMenu)
             break
             
+def statMail():
+    print ('e')

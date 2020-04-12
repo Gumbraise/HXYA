@@ -72,11 +72,11 @@ python3 .\hxya.py
 
 * MasterCard - Get unlimited fake MasterCard credit cards.
 
-** Mail Spammer
+**Mail Spammer**
 
 * Spam Mail - Spam the mailbox of who you want with the email that you want. It is necessary to get an API_KEY => Requests a key by mail at <a href="mailto:mail@hxya.kellis.fr">mail@hxya.kellis.fr</a>
 
-* Statistics - Get the statistics of your key.
+* Statistics - Get the statistics of your key. **(IN BUILD)**
 
 **Clear Cache**
 
