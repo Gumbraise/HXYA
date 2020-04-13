@@ -2,19 +2,37 @@
 # -*- coding: utf-8 -*-
 
 from lib.menu import pyVer, clear, menu
-from core.youtube import likClo, disClo, subClo, comClo, vieClo
-from core.instagram import avaPse, bomber, wdnfm, unfollow
-from core.ccg import ccg
-from core.mail import mail, statMail
-from lib.config import config
-from lib.cache import initca
-
-import lib.print as printMenu
-
-import os, requests, json, time, sys, datetime
-from colorama import init, Fore, Back, Style
+from lib.update import update
 
 pyVer()
+update()
+
+print (' HXYA modules verification...', end='')
+print (' Modules verification...', end='')
+
+try:
+    import os, requests, json, time, sys, datetime
+    from colorama import init, Fore, Back, Style
+    print (' Good!')
+except:
+    print (' Some modules are missing. Please execute python3 -m pip install -r requirements.txt')
+    input(' Type ENTER to exit')
+
+try:
+    from core.youtube import likClo, disClo, subClo, comClo, vieClo
+    from core.instagram import avaPse, bomber, wdnfm, unfollow
+    from core.ccg import ccg
+    from core.mail import mail, statMail
+    from lib.config import config
+    from lib.cache import initca
+
+    import lib.print as printMenu
+    print (' Good!')
+    input(' Type ENTER to launch HXYA')
+except:
+    print (' Some HXYA modules are missing. Please download the new version on https://github.com/gumbraise/HXYA')
+    input(' Type ENTER to exit')
+    exit()
 
 clear()
 menu()

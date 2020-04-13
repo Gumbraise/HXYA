@@ -1,15 +1,19 @@
 import sys, os, getpass, json
-from lib.InstagramAPI.InstagramAPI import InstagramAPI
 from colorama import Fore, Style
 from datetime import date
 
 def pyVer():
+	clear()
+	menu()
+	print (' Python version verification...', end='')
 	version = sys.version[:1]
 	if int(version) == 3:
+		print (' Good!')
 		pass
 	else:
-		print("Veuillez lancer la version 3 de python...")
-		input("Appuyez sur ENTER pour quitter le programme")
+		clear()
+		print(" Veuillez lancer la version 3 de python...")
+		input(" Appuyez sur ENTER pour quitter le programme")
 		sys.exit()
 
 def clear():

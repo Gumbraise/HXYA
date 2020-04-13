@@ -1,7 +1,7 @@
 {
     "version": {
-        "stable": "3.1",
+        "stable": "3.2",
         "alpha": "4.0-dev.1",
-        "beta": "3.1-dev.1"
+        "beta": "3.2-dev.1"
     }
 }
