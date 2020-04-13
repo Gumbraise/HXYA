@@ -58,4 +58,45 @@ def mail():
             break
             
 def statMail():
-    print ('e')
+    clear()
+    menu()
+    API_KEY = input('Mail API: ')
+
+    url = 'http://mail.kellis.fr/stat.php?key='+API_KEY
+    r = requests.get(url)
+    data2 = r.json()
+    try:
+        data = """
+ "id"=>"%s"
+ "name"=>"%s"
+ "mailLimit"=>"%s"
+ "differentMailLimit"=>"%s"
+ "expiration"=>"%s"
+ "mail"=>"%s"
+        """ % (
+            str(data2['id']),
+            str(data2['name']),
+            str(data2['mailLimit']),
+            str(data2['differentMailLimit']),
+            str(data2['expiration']),
+            str(data2['mail'])
+        )
+
+        print (data)
+        input('Type ENTER to exit')
+        clear()
+        menu()
+        print (printMenu.mailMenu)
+    except:
+        clear()
+        print ('An error has occurred')
+        print ('Reason:')
+        print ('    '+str(data2['error']['errors']['0']['reason']))
+        print ('Message error:')
+        print ('    '+str(data2['error']['message']))
+        print ('Error code:')
+        print ('    '+str(data2['error']['errors']['code']))
+        input('Type ENTER to exit')
+        clear()
+        menu()
+        print (printMenu.mailMenu)
