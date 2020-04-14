@@ -8,7 +8,6 @@ pyVer()
 update()
 
 print (' HXYA modules verification...', end='')
-print (' Modules verification...', end='')
 
 try:
     import os, requests, json, time, sys, datetime
@@ -17,6 +16,8 @@ try:
 except:
     print (' Some modules are missing. Please execute python3 -m pip install -r requirements.txt')
     input(' Type ENTER to exit')
+
+print (' Modules verification...', end='')
 
 try:
     from core.youtube import likClo, disClo, subClo, comClo, vieClo

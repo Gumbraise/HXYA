@@ -10,52 +10,40 @@ def mail():
     Subject = input('Subject: ')
     Message = input('Message: ')
 
-    caracteres = "azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN0123456789"
-    longueur = 10
-    mdp = ""
-    compteur = 0
-    
-    while compteur < longueur:
-        lettre = caracteres[random.randint(0, len(caracteres)-1)]
-        mdp += lettre
-        compteur += 1
- 
-    fromj = mdp+"@gumbraise.fr"
+    try:
+        url = 'http://mail.kellis.fr/?key='+API_KEY+'&mail=simple'
+        data = {
+                'to':To,
+                'subject':Subject,
+                'message':Message
+               }
 
-    while True:
+        print ('Flood in progress. Type CTRL+C to stop flooding')
+
+        r = requests.post(url = url, data = data)
+
+        data2 = r.json()
+
         try:
-            url = 'http://mail.kellis.fr/?key='+API_KEY+'&mail=simple'
-            data = {
-                    'to':To,
-                    'subject':Subject,
-                    'message':Message,
-                    'from':fromj}
-            r = requests.post(url = url, data = data)
-
-            data2 = r.json()
-
-            try:
-                if (str(data2['code']) == '200'):
-                    print ('Mail sent. Type CTRL+C to stop flooding')
-            except:
-                clear()
-                print ('An error has occurred')
-                print ('Reason:')
-                print ('    '+str(data2['error']['errors']['0']['reason']))
-                print ('Message error:')
-                print ('    '+str(data2['error']['message']))
-                print ('Error code:')
-                print ('    '+str(data2['error']['errors']['code']))
-                input('Type ENTER to exit')
-                clear()
-                menu()
-                print (printMenu.mailMenu)
-                break
-        except KeyboardInterrupt:
+            if (str(data2['code']) == '200'):
+                pass
+        except:
+            clear()
+            print ('An error has occurred')
+            print ('Reason:')
+            print ('    '+str(data2['error']['errors']['0']['reason']))
+            print ('Message error:')
+            print ('    '+str(data2['error']['message']))
+            print ('Error code:')
+            print ('    '+str(data2['error']['errors']['code']))
+            input('Type ENTER to exit')
             clear()
             menu()
             print (printMenu.mailMenu)
-            break
+    except KeyboardInterrupt:
+        clear()
+        menu()
+        print (printMenu.mailMenu)
             
 def statMail():
     clear()
